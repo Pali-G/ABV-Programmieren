@@ -8,5 +8,3 @@ Um eine .jar Datei (Java Archive Datei) zu erstellen, muss eine Manifest-Datei e
 Die .jar Datei ist ein Zip-Archiv und enthält viele Dateien. In ihr werden zusätzlich auch Metadaten und andere Ressourcen wie z.B. Bilder gespeichert.
 Wenn man ein java-Programm an dritte weiter geben möchte, wäre es viel sinnvoller, dies als .jar Datei zu tun, als eine .class Datei zu verschicken, wenn das Programm mehrere Dateien enthält.
 Die jar Datei kann dann vonn der dritten Person mit java -jar ausgeführt werden.
-
-
