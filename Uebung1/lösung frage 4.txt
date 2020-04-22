@@ -1,3 +1,5 @@
+Von: Lia Melissa Lochner, 
+
 Wie kann man das Programm an Dritte weitergeben, sodass diese es auf ihren Rechnern ausführen können?
 
 In Eclipse:
