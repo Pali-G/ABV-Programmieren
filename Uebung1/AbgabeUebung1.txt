@@ -1,4 +1,4 @@
-Abgabe von Patricia Gerbig, Jakob Degmair, Lia Melissa Lochner, Noah
+Abgabe von Patricia Gerbig, Jakob Degmair, Lia Melissa Lochner, Noah Frick
 Wie kann man das Programm an Dritte weitergeben, sodass diese es auf ihren Rechnern ausführen können?
 
 In Eclipse:
