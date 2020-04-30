@@ -22,7 +22,7 @@ public class projekt_zwei {
 	
 	 System.out.println("x/y + x/y = " + (x/y + x/y));
 	 
-	 System.out.println("x/y � x/y = " + (x/y - x/y));
+	 System.out.println("x/y – x/y = " + (x/y - x/y));
 	 
 	 System.out.println("y/y = " + y/y);
 	 
@@ -49,3 +49,18 @@ public class projekt_zwei {
 	}
 	
 }
+
+/*
+x/y = Infinity
+-y/x = -0.0
+x/y + x/y = Infinity
+x/y – x/y = NaN
+y/y = NaN
+z/z = NaN
+n/m = 0
+Math.sqrt (-x) = NaN
+Math.log (-x) = NaN
+max + 1 = 21474836471
+min - 1 = 2147483647
+(max+1)== (min) = true
+*/
