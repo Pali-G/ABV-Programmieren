@@ -38,11 +38,11 @@ public class projekt_zwei {
 	 
 	 System.out.println("min - 1 = " + (min-1));
 	 
-	// System.out.println(Long.MAX VALUE);
+   	 System.out.println("Long.MAX_VALUE = " + Long.MAX_VALUE);
 	 
-	// System.out.println(Double.MAX VALUE);
+	 System.out.println("Double.MAX_VALUE = " + Double.MAX_VALUE);
 	 
-	// System.out.println(Double.MAX VALUE*2);
+	 System.out.println("Double.MAX_VALUE*2 = " + Double.MAX_VALUE*2);
 	 
 	 System.out.println("(max+1)== (min) = " + ((max+1)==(min)));
 	
@@ -62,5 +62,8 @@ Math.sqrt (-x) = NaN
 Math.log (-x) = NaN
 max + 1 = 21474836471
 min - 1 = 2147483647
+Long.MAX_VALUE = 9223372036854775807
+Double.MAX_VALUE = 1.7976931348623157E308
+Double.MAX_VALUE*2 = Infinity
 (max+1)== (min) = true
 */
