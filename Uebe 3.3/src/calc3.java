@@ -6,8 +6,9 @@ public class calc3 {
 
     public static void main(String[] args) {
         
-        //stub, automatically generated method  
-		///has left the body blank to be filled in
+        /*Benutzereingabe starten
+	*(stub, automatically generated method  
+	*has left the body blank to be filled in) */
         Scanner scn = new Scanner(System.in);
 
         // Variabeln
@@ -16,6 +17,7 @@ public class calc3 {
         // für Rechenoperatoren
         char operator;
 
+	// Benutzereingabe
         System.out.println("Geben Sie die erste Zahl ein:");
         fnum = scn.nextDouble();
 
@@ -25,6 +27,7 @@ public class calc3 {
         System.out.println("Geben Sie den Rechenoperator ein (+,-,*,/)");
         operator = scn.next().charAt(0);
 
+	//Operator Eingabe Vorraussetzungen
         if (operator == '*') {
             System.out.println(fnum * snum);
         }else if (operator == '/'){
@@ -37,6 +40,7 @@ public class calc3 {
             System.out.println("Ungültiges Zeichen");
         }
 
+	//Benutzereingabe beenden
         scn.close();
     }
 }
