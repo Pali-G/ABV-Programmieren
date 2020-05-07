@@ -5,12 +5,15 @@ import java.util.Scanner; /* Benutzereingabe, scanner teilt die Benutzereingabe 
 public class calc3 {
 
     public static void main(String[] args) {
-     
+        
+        //stub, automatically generated method  
+		///has left the body blank to be filled in
         Scanner scn = new Scanner(System.in);
 
+        // Variabeln
         double fnum;
         double snum;
-
+        // für Rechenoperatoren
         char operator;
 
         System.out.println("Geben Sie die erste Zahl ein:");
