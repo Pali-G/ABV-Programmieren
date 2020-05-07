@@ -1,4 +1,6 @@
-import java.util.Scanner; 
+import java.util.Scanner; /* Benutzereingabe, scanner teilt die Benutzereingabe in Wörter 
+ * mit einem Trennungsmuster
+ */
 
 public class calc3 {
 
