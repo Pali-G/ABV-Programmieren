@@ -1,24 +1,33 @@
+
+import java.util.Scanner;
+
 public class calculator{
+	static String term;
     public static void main(String[] args){
-	//System.out.println(args[0]);
-	if (args[0].contains("help") || args[0].contains("?")){
-	    System.out.println("Folgende Informationen gibt es zur Benutzung dieses Taschenrechners:");
-	    System.out.println("- Setzen sie zwischen jede Zahl und Operator und Klammer ein Leerzeichen");
-	    System.out.println("  z.B. ( 3 + 2 ) / 4 * ( 5 - 2 )");
-	    System.out.println("- Achten sie auf korrekte Klammersetzung");
-	    System.out.println("- schreiben sie ihren term als einen String (in Anführungszeichen)");
+    if (args.length > 0) {
+    	term = args[0];
+    	if (args.length > 1) {
+    		System.out.println("Bitte geben sie den Term korrekt ein. Bei Fragen help oder ? eingeben");
+    	}
+    }else {
+    	System.out.println("Bitte term Eingeben:");
+    	Scanner sc = new Scanner(System.in);
+    	term = sc.nextLine();  
+    }
+    
+	if (term.contains("help") || term.contains("?")){
+	    help();
 	    return;
 	}
-	if (args.length > 1 || correctBrackets(args[0]) == false){
+	if (correctBrackets(term) == false){
 	    System.out.println("Bitte geben sie den Term korrekt ein. Bei Fragen help oder ? eingeben");
 	    return;
 	}
-	double result = reduceTerm(args[0]);
+	double result = reduceTerm(term);
 	System.out.println("Das Ergebnis ist: " + result);
     }
 
     public static double reduceTerm(String term){
-	System.out.println(term);
 	double tmpres = 0;
 	int len = term.length();
 	for (int i = 0; i <= (len-1); i++){
@@ -61,7 +70,6 @@ public class calculator{
 		}
 	    }
 	}
-	System.out.println("res: " + tmpres);
 	return tmpres;
     }
 
@@ -136,6 +144,15 @@ public class calculator{
 	    corBrac = false;
 	}
 	return corBrac;
+    }
+    
+    public static void help() {
+    	System.out.println("Folgende Informationen gibt es zur Benutzung dieses Taschenrechners:");
+	    System.out.println("- Setzen sie zwischen jede Zahl und Operator und Klammer ein Leerzeichen");
+	    System.out.println("  z.B. ( 3 + 2 ) / 4 * ( 5 - 2 )");
+	    System.out.println("- Achten sie auf korrekte Klammersetzung");
+	    System.out.println("- schreiben sie ihren term als einen String (in Anführungszeichen) wenn sie den Taschenrechner in der Command Line nutzen");
+	    return;
     }
     
 }
