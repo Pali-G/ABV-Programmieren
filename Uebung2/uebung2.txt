@@ -1,3 +1,5 @@
+Abgabe von Patricia Gerbig, Jakob Degmair, Lia Melissa Lochner, Noah Frick
+
 Aufgabe 1)
 a) Ergebnis: 0; mögliche Typen: byte, short, int, long, double (alle nummerischen Datentypen)
 b) Ergebnis: False; Typ: boolean
