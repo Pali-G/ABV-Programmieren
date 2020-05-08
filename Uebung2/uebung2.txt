@@ -10,7 +10,7 @@ h) Ergebnis: 2; mögliche Typen: byte, short, int, long, double (alle nummerisch
 i) Ergebnis: -6; Typ: double
 j) Ergebnis: 8;  mögliche Typen: byte, short, int, long, double (alle nummerischen Datentypen)
 k) Ergebnis: 24; mögliche Typen: byte, short, int, long, double (alle nummerischen Datentypen), auf verschiedenen Systemen jewils int und float by default
-l) Ergebnis: Infinity; Typ: Infinity
+l) Ergebnis: Infinity; Typ: Infinity (Wenn man durch 0 teilt, dann bekomment man einen / by zero fehler. bei 0.0 jedoch nicht, da java es nicht als "richtige Null" betrachtet sondern als das unendliche Element eine Nullfolge, welches ungleich null ist)
 
 Aufgabe 2)
 Wert der Variablen pro Zeile

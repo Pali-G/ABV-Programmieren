@@ -1,10 +1,7 @@
-package uebung;
 
+public class aufgabe3 {
 
-public class projekt_zwei {
-
-	public static void main(String[] args)
-	{
+	public static void main(String[] args){
 	
 	//Attribute
 	  double x = 1.0;
