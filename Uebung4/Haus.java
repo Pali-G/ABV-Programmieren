@@ -1,32 +1,24 @@
-//package Uebung4;
+package uebung4;
 import java.util.Scanner;
-import java.time.Year;
 
 
 public class Haus{
     
-    public static void main (String[] args){
-	Haus Haus1 = new Haus(5,1,1950,false,true);
-	Haus1.WohnungenBewohnt(wohnungen, Anzahlwohnungen);
-	Haus1.WreckingBall(Baujahr, wohnungen, Anzahlwohnungen, gebaut);
-    }
-
     static int Anzahlwohnungen;//static nur solange bis diese Variablen nicht mehr direkt von der mainfunction aufgerufen werden
     int Hausnummer;//Grundstücknummer
-    static int Baujahr;
+    int Baujahr;
     boolean Hausbewohnt;// true ist bewohnt, false ist leer
-    static boolean gebaut;//true ist gebaut
+    boolean gebaut;//true ist gebaut
     static boolean[] wohnungen;//sh. Anzahlwohnungen
     //evtl Strasse
 
     //Konstruktor Klasse Haus
-    public Haus(int AW ,int HN, int BJ, boolean HL, boolean geb){
+    public Haus(int AW ,int HN, int BJ, boolean geb){
 	this.Anzahlwohnungen = AW;//So wird der Variable Hausnummer im Konstruktor ein wert zugeordnet
 	this.Hausnummer = HN;
 	this.Baujahr = BJ;
-	this.Hausbewohnt = HL;
 	this.gebaut = geb;
-	this.wohnungen = defwohnungen(Anzahlwohnungen);
+	Haus.wohnungen = defwohnungen(Anzahlwohnungen);
     }
 
     //Funktion zur eingabe von welche Wohnungen besetzt sind
@@ -46,27 +38,27 @@ public class Haus{
 	return wng;
     }
     
-    public static boolean WohnungenBewohnt(boolean[] wohnungen, int Anzahlwohnungen){//boolean[] wohnungen, int Anzahlwohnungen
+    public static boolean WohnungenLeer(boolean[] wohnungen, int Anzahlwohnungen){//boolean[] wohnungen, int Anzahlwohnungen
 	int bewohnt = 0;
 	boolean leer = false;
 	for (int i = 0; i <= wohnungen.length -1; i++){
 	    if (wohnungen[i] == true){
-		    bewohnt++;
-		}
-	}
-	System.out.println("Es sind " + bewohnt + " von " + Anzahlwohnungen + " bewohnt");
-	if (bewohnt == 0){
-		leer = true;
+		bewohnt++;
 	    }
+	}
+	//System.out.println("Es sind " + bewohnt + " von " + Anzahlwohnungen + " bewohnt");
+	if (bewohnt == 0){
+	    leer = true;
+	}
 	return leer;
     }
 
     
-    public static boolean WreckingBall(int Baujahr, boolean[] wohnungen, int Anzahlwohnungen, boolean gebaut){
-	int jahr = Year.now().getValue();
-	if ((WohnungenBewohnt(wohnungen, Anzahlwohnungen) == true) && ((jahr - Baujahr) >= 60) && gebaut == true){
-	    gebaut = false;
-	    }
-	return gebaut;
-    }
+    /*public static boolean WreckingBall(int Baujahr, boolean[] wohnungen, int Anzahlwohnungen, boolean gebaut){
+    	int jahr = Year.now().getValue();
+    	if ((WohnungenLeer(wohnungen, Anzahlwohnungen) == true) && ((jahr - Baujahr) >= 60) && gebaut == true){
+    	    gebaut = false;
+    	}
+    	return gebaut;
+        }*/
 }
