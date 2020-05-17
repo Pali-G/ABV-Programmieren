@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Haus{
     public static void main (String[] args){
 	/*int x = 5;
@@ -9,36 +11,49 @@ public class Haus{
 	w[4] = true;
 	boolean k = WohnungenBewohnt(w, x);
 	System.out.println(k);*/
-	Haus Haus1 = new Haus(4);// 1, 1998, true
-	System.out.println(Haus1.WohnungenBewohnt());
-
-       
+	//Haus Haus1 = new Haus(4);// 1, 1998, true
+	//System.out.println(Haus1.WohnungenBewohnt());
+	Haus Haus1 = new Haus(5,1,1998,true,true);
+	Haus1.WohnungenBewohnt(wohnungen, Anzahlwohnungen);
+	
     }
-    public int Anzahlwohnungen;
+    static int Anzahlwohnungen;
     int Hausnummer;//Grundstücknummer
     int Baujahr;
-    boolean Hausleer;
-    boolean gebaut;
-    //evtl Strasse
+    boolean Hausbewohnt;// true ist bewohnt, false ist leer
+    boolean gebaut;//true ist gebaut
+    static boolean[] wohnungen;
     
+    //evtl Strasse
 
-    public Haus(int AW){//, int Hausnummer, int Baujahr, boolean gebaut
-	this.Anzahlwohnungen = AW;
-	boolean[] wohnungen = new boolean[Anzahlwohnungen-1];
-	for (int i = 0; i < AW-1; i++){
-	    if (i%2==0){
-		wohnungen[i] = true;
-	    }else{
-		wohnungen[i] = false;
-	    }
-	}
+    //Konstruktor Klasse Haus
+    public Haus(int AW ,int HN, int BJ, boolean HL, boolean geb){
+	this.Anzahlwohnungen = AW;//So wird der Variable Hausnummer im Konstruktor ein wert zugeordnet
+	this.Hausnummer = HN;
+	this.Baujahr = BJ;
+	this.Hausbewohnt = HL;
+	this.gebaut = geb;
+	this.wohnungen = defwohnungen(Anzahlwohnungen);
     }
 
+    //Funktion zur eingabe von welche Wohnungen besetzt sind
+    public static boolean[] defwohnungen(int Anzahlwohnungen){
+	boolean[] wng = new boolean[Anzahlwohnungen];
+	System.out.println("Geben sie true oder false ein um die Wohnunge zu besetzen");
+	for (int i = 0; i < Anzahlwohnungen; i++){
+	    System.out.println("Wohnung " + i);
+	    Scanner scanner = new Scanner(System.in);
+	    String input = scanner.nextLine();
+	    if (input.contains("t") == true){
+		wng[i] = true;
+	    }else if(input.contains("f") == true){
+		wng[i] = false;
+	    }
+	}
+	return wng;
+    }
     
-
-    public boolean WohnungenBewohnt(){//boolean[] wohnungen, int Anzahlwohnungen
-	this.AW = Anzahlwohnungen;
-	this.wohnungen = wohnungen;
+    public static boolean WohnungenBewohnt(boolean[] wohnungen, int Anzahlwohnungen){//boolean[] wohnungen, int Anzahlwohnungen
 	int bewohnt = 0;
 	boolean leer = false;
 	for (int i = 0; i <= wohnungen.length -1; i++){
