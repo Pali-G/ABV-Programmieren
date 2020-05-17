@@ -1,0 +1,31 @@
+Create class "haus.java" ; "street.java"
+
+Haus:
+  //Attribute
+  Anzahlwohnungen;
+  Hausnummer;//Grundstücknummer
+  Baujahr;
+  Hausbewohnt;// true ist bewohnt, false ist leer
+  gebaut;//true ist gebaut
+  wohnungen;
+
+  //Methoden
+  Anzahl bewohnte wohnungen;
+  Anzahl unbewohnte Wohnungen;
+  Anzahl Wohnungen;
+
+  Alter > 50 => Haus abreisen
+
+
+Street:
+  //Attribute
+  Anzahlhaeuser;
+
+  //Methoden
+  Haus abgerissen => neuem Haus
+
+  unbewohnte Wohnungen = 0 => neues Haus
+
+
+Simulation:
+  änderungen Jährlich
