@@ -1,0 +1,6 @@
+-Xlint:all
+-cp
+;I:\\Uni\\Programmieren\\atom
+-sourcepath
+src/main/java/
+W:\\Dokumente\\Programmieren\\Java-Modul\\uebung_4_2\\die_strasse.java
