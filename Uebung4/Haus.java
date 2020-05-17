@@ -1,17 +1,21 @@
+//package Uebung4;
 import java.util.Scanner;
 import java.time.Year;
 
+
 public class Haus{
+    
     public static void main (String[] args){
-	Haus Haus1 = new Haus(5,1,1998,true,true);
+	Haus Haus1 = new Haus(5,1,1950,false,true);
 	Haus1.WohnungenBewohnt(wohnungen, Anzahlwohnungen);
-	
+	Haus1.WreckingBall(Baujahr, wohnungen, Anzahlwohnungen, gebaut);
     }
+
     static int Anzahlwohnungen;//static nur solange bis diese Variablen nicht mehr direkt von der mainfunction aufgerufen werden
     int Hausnummer;//Grundstücknummer
-    int Baujahr;
+    static int Baujahr;
     boolean Hausbewohnt;// true ist bewohnt, false ist leer
-    boolean gebaut;//true ist gebaut
+    static boolean gebaut;//true ist gebaut
     static boolean[] wohnungen;//sh. Anzahlwohnungen
     //evtl Strasse
 
@@ -58,10 +62,10 @@ public class Haus{
     }
 
     
-    public boolean WreckingBall(int Baujahr, boolean[] wohnungen, int Anzahlwohnungen, boolean gebaut){
+    public static boolean WreckingBall(int Baujahr, boolean[] wohnungen, int Anzahlwohnungen, boolean gebaut){
 	int jahr = Year.now().getValue();
 	if ((WohnungenBewohnt(wohnungen, Anzahlwohnungen) == true) && ((jahr - Baujahr) >= 60) && gebaut == true){
-		gebaut = false
+	    gebaut = false;
 	    }
 	return gebaut;
     }
