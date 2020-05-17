@@ -1,29 +1,18 @@
 import java.util.Scanner;
+import java.time.Year;
 
 public class Haus{
     public static void main (String[] args){
-	/*int x = 5;
-	boolean[] w = new boolean[5];
-	w[0] = true;
-	w[1] = false;
-	w[2] = false;
-	w[3] = false;
-	w[4] = true;
-	boolean k = WohnungenBewohnt(w, x);
-	System.out.println(k);*/
-	//Haus Haus1 = new Haus(4);// 1, 1998, true
-	//System.out.println(Haus1.WohnungenBewohnt());
-	Haus Haus1 = new Haus(5,1,1998,true,true);
-	Haus1.WohnungenBewohnt(wohnungen, Anzahlwohnungen);
+	//Haus Haus1 = new Haus(5,1,1998,true,true);
+	//Haus1.WohnungenBewohnt(wohnungen, Anzahlwohnungen);
 	
     }
-    static int Anzahlwohnungen;
+    static int Anzahlwohnungen;//static nur solange bis diese Variablen nicht mehr direkt von der mainfunction aufgerufen werden
     int Hausnummer;//Grundstücknummer
     int Baujahr;
     boolean Hausbewohnt;// true ist bewohnt, false ist leer
     boolean gebaut;//true ist gebaut
-    static boolean[] wohnungen;
-    
+    static boolean[] wohnungen;//sh. Anzahlwohnungen
     //evtl Strasse
 
     //Konstruktor Klasse Haus
@@ -66,5 +55,13 @@ public class Haus{
 		leer = true;
 	    }
 	return leer;
+    }
+
+    public boolean Hausabreissen(int Baujahr, boolean[] wohnungen, int Anzahlwohnungen, boolean gebaut){
+	int jahr = Year.now().getValue();
+	if ((WohnungenBewohnt(wohnungen, Anzahlwohnungen) == true) && ((jahr - Baujahr) >= 60) && gebaut == true){
+		gebaut = false
+	    }
+	return gebaut;
     }
 }
