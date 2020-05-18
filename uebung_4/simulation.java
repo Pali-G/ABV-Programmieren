@@ -17,21 +17,12 @@ public class simulation {
     int Hausnummer;
     int jahr = 1998;
     int AGr = 100;
-    /*int Baujahr;
+    /*
     boolean gebaut = true / false;
     boolean WohnungenBewohnt = true / false;
     int Anzahlwohnungen = 8;
     boolean[] wohnungen;*/
 
-    /*public simulation(int AW ,int HN, int BJ, boolean HL, boolean geb) {
-      this.Hausnummer = HN;
-      this.Baujahr = BJ;
-      this.gebaut = geb;
-      this.Hausbewohnt = HL;
-      this.Anzahlwohnungen = AW;
-      this.wohnungen = defwohnungen(Anzahlwohnungen);
-
-    }*/
     System.out.println("Jahr:" + jahr + ", Beginnen Sie das nächste Jahr mit der Eingabe: y");
     yesno = scn.next().charAt(0);
 
