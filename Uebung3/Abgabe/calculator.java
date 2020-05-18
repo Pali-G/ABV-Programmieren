@@ -90,11 +90,14 @@ public class calculator{
     //Hilfsfunktion zur überprüfung Term vollständig in Klammern gefasst ist
     public static boolean outerBrackets(String term){
 	boolean outerBracket = true;
+	int il = 0;
+	int jl = 0;
 	for (int i = 0; i <= (term.length()-1); i++){
 	    if (term.charAt(i) == '/' || term.charAt(i) == '*' ||term.charAt(i) == '+' ||term.charAt(i) == '-'){
 		outerBracket = false;
 	    }
 	    if (term.charAt(i) == '('){
+		il = i;
 		break;
 	    }
 	}
@@ -103,7 +106,22 @@ public class calculator{
 		outerBracket = false;
 	    }
 	    if (term.charAt(j) == ')'){
+		jl = j;
 		break;
+	    }
+	    
+	}
+        String newterm = term.substring(il+1,jl);
+	if (outerBracket == true){
+	    for (int i = 0; i <= (newterm.length()-1); i++){
+		if (newterm.charAt(i) == '('){
+		    break;
+		}
+		if (newterm.charAt(i) == ')'){
+		    
+		    outerBracket = false;
+		    break;
+		}
 	    }
 	}
 	return outerBracket;
@@ -122,14 +140,29 @@ public class calculator{
     //Hilfsfunktion ob Element in Klammern
     public static boolean inBrackets(String term, int posElement){
 	boolean inBracket = false;
-	for (int i = 0; i <= term.length()-1; i++){
-	    for (int j = (term.length() - 1); i < j; j--){
-		if (term.charAt(i) == '(' && term.charAt(j) == ')'){
-		    if (posElement > i && posElement < j){
-			inBracket = true;
-		    }
-		}
-	    }    
+	int ibrackopen = 0;
+	int ibrackclose = 0;
+	int jbrackopen = 0;
+	int jbrackclose = 0;
+	for (int i = posElement; i >= 0; i--){
+	    System.out.println(term.charAt(i));
+	    if (term.charAt(i) == '('){
+		ibrackopen++;
+	    }
+	    if (term.charAt(i) == ')'){
+		ibrackclose++;
+	    }
+	}
+	for (int j = posElement; j<term.length(); j++){
+	      if (term.charAt(j) == '('){
+		jbrackopen++;
+	    }
+	    if (term.charAt(j) == ')'){
+		jbrackclose++;
+	    }  
+	}
+	if ((ibrackopen-ibrackclose) != 0 || (jbrackclose - jbrackopen) != 0){
+	    inBracket = true;
 	}
 	return inBracket;
     }
