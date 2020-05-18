@@ -14,8 +14,9 @@ public class simulation {
     int Anzahlhaeuser = 20;
     int WohnungenBewohnt;
     char yesno;
-    int Hausnummer = 100;
+    int Hausnummer;
     int jahr = 1998;
+    int AGr = 100;
     /*int Baujahr;
     boolean gebaut = true / false;
     boolean WohnungenBewohnt = true / false;
@@ -37,7 +38,8 @@ public class simulation {
       while (yesno == 'y') {
         int j = jahr+1;
 
-        for (int counter=1;counter<=100; counter++) {
+
+        for (Hausnummer=1;Hausnummer<=1;Hausnummer++) {
           Anzahlhaeuser = Anzahlhaeuser + dice.nextInt(5);
           System.out.println (Anzahlhaeuser + " Häuser");
         }
