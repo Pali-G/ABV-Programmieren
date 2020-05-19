@@ -1,3 +1,4 @@
+// nicht integrierte Simulation, Variante 1
 
 import java.util.Scanner;
 import java.util.Random;
