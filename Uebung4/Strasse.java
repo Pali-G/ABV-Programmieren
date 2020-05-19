@@ -22,9 +22,7 @@ public class Strasse {
 				Anzahlwohnungslose += benötigteWng - i;
 				break;
 			} else {
-				System.out.println(H[Hausnummer].gebaut);
 				H[Hausnummer] = Hausbauen(H[Hausnummer], Jahr);
-				System.out.println(H[Hausnummer].gebaut);
 				i += H[Hausnummer].wohnungen.length;
 			}
 		}
@@ -34,7 +32,6 @@ public class Strasse {
 	
 	public static int Grundstückfinden(Haus[] H) {
 		int HN = -1;
-		System.out.println(FreieGrundstücke(H));
 		for (int i = 0; i < H.length; i++) {
 			if (H[i].gebaut == false) {
 				HN = i;
@@ -58,6 +55,10 @@ public class Strasse {
 		H.Baujahr = jahr;
 		H.gebaut = true;
 		H.Anzahlwohnungen = new Random().nextInt(20) + 1;
+		H.wohnungen = new boolean[H.Anzahlwohnungen];
+		for (int i = 0; i < H.Anzahlwohnungen; i++) {
+			H.wohnungen[i] = false;
+		}
 		return H;
 	}
 
@@ -66,7 +67,7 @@ public class Strasse {
 		Wohnungsstats[0] = 0;// Anzahlwohnungenallgemein
 		Wohnungsstats[1] = 0;// belegteWohnungen
 		for (int i = 0; i < H.length; i++) {
-			for (int j = 0; j < H[i].Anzahlwohnungen; j++) {
+			for (int j = 0; j < H[i].wohnungen.length; j++) {
 				if (H[i].gebaut == true) {
 					if (H[i].wohnungen[j] == true) {
 						Wohnungsstats[1]++;
@@ -95,7 +96,7 @@ public class Strasse {
 	public static int[] Wohnungssuche(Haus[] H) {
 		int[] Mieter = new int[2];
 		for (int k = 0; k < H.length; k++) {// Es wird durch die Haus liste iteriert
-			for (int j = 0; j < H[k].Anzahlwohnungen; j++) {// Es wird durch die Listes des kten Haus iteriert
+			for (int j = 0; j < H[k].wohnungen.length; j++) {// Es wird durch die Listes des kten Haus iteriert
 				if (H[k].gebaut == true) {
 					if (H[k].wohnungen[j] == false) {
 						Mieter[0] = k;
@@ -131,10 +132,12 @@ public class Strasse {
 
 	public static int[] Wohnungsmarkt(int[] wohnungsstats) {
 		int FreieWohnungen = wohnungsstats[0] - wohnungsstats[1];
+		int Wngingsmt = wohnungsstats[0];
 		int[] kommenundgehen = new int[2];
-		kommenundgehen[0] = new Random().nextInt(FreieWohnungen + 10) + (wohnungsstats[0] / 4);// Anzahl der
+		
+		kommenundgehen[0] = new Random().nextInt(Wngingsmt/(Anzahlwohnungslose+1)) + FreieWohnungen;// Anzahl der
 																								// hinzuziehenden
-		kommenundgehen[1] = new Random().nextInt(wohnungsstats[1]);// Anzahl der wegziehenden
+		kommenundgehen[1] = new Random().nextInt((wohnungsstats[1]+2/2)*(Anzahlwohnungslose+1));// Anzahl der wegziehenden
 		return kommenundgehen;
 	}
 
@@ -153,13 +156,13 @@ public class Strasse {
 			System.out.println("Es ist Das Jahr " + jahr);
 			System.out.println("Es sind " + whnstats[1] + " von " + whnstats[0] + " Wohnungen bewohnt");
 			int[] kommenundgehen = Wohnungsmarkt(whnstats);
-			Thread.sleep(1500);
+			//Thread.sleep(1000);
 			System.out.println("Es ziehen " + kommenundgehen[0] + " Menschen hinzu und " + kommenundgehen[1] + " weg");
 			Häuser = umziehen(Häuser, whnstats, kommenundgehen, jahr);
 			if (Anzahlwohnungslose > 0) {
-				System.out.println("Es gibt " + Anzahlwohnungslose + " Wohnungslose in diese Strasse");
+				System.out.println("Es gibt " + Anzahlwohnungslose + " Wohnungslose");
 			}
-			Thread.sleep(1500);
+			Thread.sleep(1000);
 		}
 	}
 
