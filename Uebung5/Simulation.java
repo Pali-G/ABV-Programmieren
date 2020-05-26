@@ -3,9 +3,8 @@ package uebung5;
 import java.util.Random;
 
 public class Simulation {
-
 	public static void main(String[] args) {
-		Simulationn(2000, 2020);
+		Simulationn(2000, 2010);
 	}
 	
 	public static void Simulationn(int Anfangsjahr, int Endjahr) {
@@ -23,14 +22,18 @@ public class Simulation {
 		for (int jahr = Anfangsjahr; jahr <= Endjahr; jahr++) {
 			int[] whnstats = stadt.Wohnungsstatistik(haus);
 			int[] meldeamt = stadt.Meldeamt(whnstats);
-			Info(jahr, whnstats, meldeamt);
+			strasse = stadt.Strassenverzeichnis(haus, strasse);
+			Info(jahr, whnstats, meldeamt, strasse);
+			haus = stadt.Wohnraumanpassen(haus, strasse, meldeamt, whnstats, jahr);
+			
 			
 		}
 	}
-	public static void Info(int jahr, int[] whnstats, int[] meldeamt) {
+	public static void Info(int jahr, int[] whnstats, int[] meldeamt, Strasse[] strasse) {
 		System.out.println("Jahr: " + jahr);
 		System.out.println("Es sind " + whnstats[1] + " von " + whnstats[0] + " Wohnungen bewohnt.");
 		System.out.println("Es ziehen " + meldeamt[1] + " Leute weg und " + meldeamt[0] + " her.");
+		System.out.println("Es gibt " + strasse.length + " Straßen");
 		
 	}
 }

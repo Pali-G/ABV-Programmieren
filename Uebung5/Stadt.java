@@ -2,8 +2,6 @@ package uebung5;
 
 import java.util.Random;
 
-import uebung5.Haus;
-
 public class Stadt {
 
 	public Stadt() {
@@ -13,9 +11,9 @@ public class Stadt {
 	public int[] Wohnungsstatistik(Haus[] haus) {
 		int[] whnstats = new int[2];
 		for (int i = 0; i < haus.length; i++) {
-			whnstats[0] += haus[i].wohnungen.length;
-			for (int j = 0; j < haus[i].wohnungen.length; j++) {
-				if (haus[i].Hgebaut == true) {
+			if (haus[i].Hgebaut == true) {
+				whnstats[0] += haus[i].wohnungen.length;
+				for (int j = 0; j < haus[i].wohnungen.length; j++) {
 					if (haus[i].wohnungen[j] == true) {
 						whnstats[1]++;
 					}
@@ -27,12 +25,12 @@ public class Stadt {
 
 	public int[] Meldeamt(int[] whnstats) {
 		int[] meldeamt = new int[2];
-		meldeamt[0] = new Random().nextInt(whnstats[0] / 3);// herziehenden Haushalte
-		meldeamt[1] = new Random().nextInt(whnstats[0] / 4);// wegziehende Haushalte
+		meldeamt[0] = new Random().nextInt(100);// herziehenden Haushalte
+		meldeamt[1] = new Random().nextInt(whnstats[1]);// wegziehende Haushalte
 		return meldeamt;
 	}
 
-	public Haus[] Wohnraumanpassen(Haus[] haus, Strasse strasse[], int[] meldeamt, int[] whnstats, int jahr) {
+	public Haus[] Wohnraumanpassen(Haus[] haus, Strasse[] strasse, int[] meldeamt, int[] whnstats, int jahr) {
 		for (int i = 0; i < meldeamt[1]; i++) {// Ausziehen
 			int[] mieter = Rausschmiss(haus);
 			haus[mieter[0]].wohnungen[mieter[1]] = false;
@@ -44,9 +42,14 @@ public class Stadt {
 		}
 		int Whnbauen = FreieWhn - benWhn;
 		if (Whnbauen < 0) {
-			haus = Wohnraumschaffen(haus, Whnbauen);
+			haus = Wohnraumschaffen(haus, strasse, Math.abs(Whnbauen), jahr);
 		}
-
+		for (int i = 0; i < meldeamt[0]; i++) {
+			int[] mieter = Einziehen(haus);
+			// System.out.println("Mieter: " + mieter[0] + mieter[1]);
+			haus[mieter[0]].wohnungen[mieter[1]] = true;
+			// System.out.println("Wohnung: " + haus[mieter[0]].wohnungen[mieter[1]]);
+		}
 		return haus;
 	}
 
@@ -54,42 +57,97 @@ public class Stadt {
 		int[] mieter = new int[2];
 		for (int k = 0; k < haus.length; k++) {
 			for (int j = 0; j < haus[k].AnWohn; j++) {
-				if (haus[k].wohnungen[j] == true) {
-					mieter[0] = k;
-					mieter[1] = j;
-					return mieter;
+				if (haus[k].Hgebaut == true) {
+					if (haus[k].wohnungen[j] == true) {
+						mieter[0] = k;
+						mieter[1] = j;
+						return mieter;
+					}
 				}
 			}
 		}
 		return mieter;
 	}
 
-	public Haus[] Wohnraumschaffen(Haus[] haus, int Whnbauen) {
-		while (Whnbauen > 0) {
-			int[] HN = Grundstückfinden(haus);
-			if (HN[0] < 0) {
-				//haus = Strassebauen(haus);
-				
+	public int[] Einziehen(Haus[] haus) {
+		int[] mieter = new int[2];
+		for (int k = 0; k < haus.length; k++) {
+			if (haus[k].Hgebaut == true) {
+				for (int j = 0; j < haus[k].AnWohn; j++) {
+					if (haus[k].wohnungen[j] == false) {
+						// System.out.println("Bevor: " + haus[k].wohnungen[j]);
+						mieter[0] = k;
+						mieter[1] = j;
+						return mieter;
+					}
+				}
 			}
+		}
+		return mieter;
+	}
+
+	public Haus[] Wohnraumschaffen(Haus[] haus, Strasse[] strasse, int Whnbauen, int jahr) {
+		while (0<Whnbauen) {
+			int HN = Grundstückfinden(haus);
+			if (HN < 0) {
+				haus = Strassebauen(haus, strasse);
+				HN = Grundstückfinden(haus);
+			}
+			haus[HN] = Hausbauen(haus[HN], jahr);
+			Whnbauen -= haus[HN].AnWohn;
 		}
 		return haus;
 	}
 
-	public int[] Grundstückfinden(Haus[] haus) {
-		int[] HN = new int[2];
-		HN[0] = -1; // UNBEDINGT UNBEDINGT ÜBERPRÜFEN!!!
+	public int Grundstückfinden(Haus[] haus) {
+		int HN;
+		HN = -1; // UNBEDINGT UNBEDINGT ÜBERPRÜFEN!!!
 		for (int i = 0; i < haus.length; i++) {
 			if (haus[i].Hgebaut == false) {
-				HN[0] = haus[i].Hnr;
-				HN[1] = haus[i].Strnr;
+				HN = i;
 				break;
 			}
 		}
 		return HN;
 	}
 
-	/*public Haus[] Strassebauen(Haus[] haus) {
+	public Haus[] Strassebauen(Haus[] haus, Strasse[] strasse) {
 		int AnzGr = new Random().nextInt(20) + 10;
-		
-	}*/
+		for (int i = 0; i < AnzGr; i++) {
+			int AnWohn = 0;
+			int Hnr = i;
+			int Baujahr = 0000;
+			boolean Hgebaut = false;
+			Haus[] htmp = new Haus[haus.length + 1];
+			for (int j = 0; j < haus.length; j++) {
+				htmp[j] = haus[j];
+			}
+			htmp[haus.length] = new Haus(AnWohn, Hnr, Baujahr, Hgebaut, strasse.length);
+			haus = htmp;
+		}
+		return haus;
+	}
+
+	public Haus Hausbauen(Haus haus, int jahr) {
+		haus.AnWohn = new Random().nextInt(20) + 1;
+		haus.Baujahr = jahr;
+		haus.Hgebaut = true; 
+		haus.wohnungen = haus.defwohnungen(haus.AnWohn, haus.Hgebaut);
+		return haus;
+	}
+
+	public Strasse[] Strassenverzeichnis(Haus[] haus, Strasse[] strasse) {
+		int strassenanzahl = 0;
+		for (int i = 0; i<haus.length; i++) {
+			if (haus[i].Strnr > strassenanzahl) {
+				strassenanzahl = haus[i].Strnr;
+			}
+		}
+		Strasse[] strtmp = new Strasse[strassenanzahl];
+		for (int j = 0; j<strtmp.length;j++) {
+			strtmp[j] = new Strasse(j);
+		}
+		strasse = strtmp;
+		return strasse;
+	}
 }
