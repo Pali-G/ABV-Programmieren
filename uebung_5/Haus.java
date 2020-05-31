@@ -3,23 +3,25 @@ package uebung_5;
 import java.util.Random;
 
 public class Haus {
-                    
+    
 	int AnWohn;
 	int Strnr;
-	int Hnr;// Grundstücknummer
+	int Hnr;// GrundstÃ¼cknummer
 	int Baujahr;
 	//boolean Hbewohnt;// true ist bewohnt, false ist leer
 	boolean Hgebaut;// true ist gebaut
 	boolean[] wohnungen;// sh. Anzahlwohnungen
+	int Hausart;
 
 // Konstruktor Klasse Haus
-	public Haus(int AW, int HN, int BJ, boolean geb, int St) {
-		this.AnWohn = AW;// So wird der Variable Hausnummer im Konstruktor ein wert zugeordnet
-		this.Strnr =
+	public Haus(int AW, int HN, int BJ, boolean geb, int St, int HA) {
+		this.AnWohn = AW;
+		this.Strnr = St;
 		this.Hnr = HN;
 		this.Baujahr = BJ;
 		this.Hgebaut = geb;
 		this.wohnungen = defwohnungen(AnWohn, Hgebaut);
+		this.Hausart = HA;
 	}
 
 	public static boolean[] defwohnungen(int Anzahlwohnungen, boolean gebaut) {
@@ -36,3 +38,4 @@ public class Haus {
 		return wng;
 	}
 }
+
