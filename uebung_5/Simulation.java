@@ -11,24 +11,25 @@ public class Simulation {
 		int Anfangsjahr;
 		boolean yesno;
 		
-		//Simulationsl‰nge Eingabe
+		//Simulationsl√§nge Eingabe
 		System.out.println("In welchem Jahr willst du die Simulation beginnen?");
 		  Anfangsjahr = scn.nextInt();
 		  
-		System.out.println("Jahr:" + Anfangsjahr + ", Beginnen Sie das n‰chste Jahr mit der Eingabe: true");
+		System.out.println("Jahr:" + Anfangsjahr + ", Beginnen Sie das n√§chste Jahr mit der Eingabe: true");
 		    yesno = scn.nextBoolean();
 		    
 	    while (yesno == true) {
 
-	        int jahr = Anfangsjahr ++; //Jahres Z‰hler
+	        int jahr = Anfangsjahr ++; //Jahres Z√§hler
 	
 			Stadt stadt = new Stadt();
-			Strasse strasse[] = new Strasse[1];//Am Anfang der Simulation gibt es 1 Strasse mit 10 Grundst¸cken
+			Strasse strasse[] = new Strasse[1];//Am Anfang der Simulation gibt es 1 Strasse mit 10 Grundst√ºcken
 			strasse[0] = new Strasse(10);
 			Haus haus[] = new Haus[strasse[0].AGr];
 			for (int i = 0; i < haus.length; i++) {
 				int AnWohn = new Random().nextInt(20) + 1;
 				int Hnr = i;
+				int Haeuser = Haus[geb].length
 				int Baujahr = Anfangsjahr;
 				boolean Hgebaut = new Random().nextBoolean();
 				haus[i] = new Haus(AnWohn, Hnr, Baujahr, Hgebaut, 0);
@@ -42,28 +43,28 @@ public class Simulation {
 			//Info print out
 			System.out.println("Jahr: " + jahr);
 			System.out.println("Es ziehen " + meldeamt[1] + " Leute weg und " + meldeamt[0] + " her.");
-			System.out.println("Es gibt " + strasse + " Straﬂen");
-			System.out.println("Es sind in Strasse " + strasse + ", "+ whnstats[1] + " von " + whnstats[0] + " Wohnungen bewohnt.");
-			System.out.println("Es gibt " + strasse.length + " H‰user");
+			System.out.println("Es gibt " + strasse + " Stra√üen");
+			System.out.println("Es sind in Strasse " + strasse + ", "+ whnstats[1] + " von " + Haus[geb].length + " Wohnungen bewohnt.");
+			System.out.println("Es gibt " + strasse.length + " H√§user");
 	
 			//Strasse betrachten
-			/*System.out.println("Willst du eine Straﬂe genau betrachten?");
+			/*System.out.println("Willst du eine Stra√üe genau betrachten?");
 			String Aw1;
 		    Aw1 = scn.nextLine();
 		    if (Aw1.contains("t")==true) {
 	          int Aw2;
-	          System.out.println("Welche Straﬂe?");
+	          System.out.println("Welche Stra√üe?");
 	          Scanner sc7 = new Scanner(System.in);
 	          Aw2 = sc7.nextInt();
-	          System.out.println("Straﬂe " + Straﬂen[Aw2-1].Straﬂennummer + "hat " + Straﬂen[Aw2-1].AnzahlGrundst¸cke + " Grundst¸cke");
+	          System.out.println("Stra√üe " + Stra√üen[Aw2-1].Stra√üennummer + "hat " + Stra√üen[Aw2-1].AnzahlGrundst√ºcke + " Grundst√ºcke");
 	          int Hgebaut = 0;
-	          for (int k = 0; k <Straﬂen[Aw2-1].H‰user.length; k++) {
-	            if (Straﬂen[Aw2-1].H‰user[k].gebaut==true) {
+	          for (int k = 0; k <Stra√üen[Aw2-1].H√§user.length; k++) {
+	            if (Stra√üen[Aw2-1].H√§user[k].gebaut==true) {
 	              Hgebaut++;
 	            }
 	          }
 		    }*/
-		    System.out.println("Das Jahr: " + jahr + " endet , Beginnen Sie das n‰chste Jahr mit der Eingabe: true, oder beenden sie die Simulation mit: false");
+		    System.out.println("Das Jahr: " + jahr + " endet , Beginnen Sie das n√§chste Jahr mit der Eingabe: true, oder beenden sie die Simulation mit: false");
 		    yesno = scn.nextBoolean(); //neues Jahr
 	    }   
 	    if (yesno == false){
@@ -75,3 +76,4 @@ public class Simulation {
 	
 	}
 }
+
