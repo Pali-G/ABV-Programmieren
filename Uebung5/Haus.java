@@ -20,6 +20,7 @@ public class Haus {
 		this.Baujahr = BJ;
 		this.Hgebaut = geb;
 		this.wohnungen = defwohnungen(AnWohn, Hgebaut);
+		this.wohnungenbewohnt = wohnungenbewohnt();
 	}
 	
 	public static boolean[] defwohnungen(int Anzahlwohnungen, boolean gebaut) {
@@ -45,3 +46,4 @@ public class Haus {
 		return wb;
 	}
 }
+
