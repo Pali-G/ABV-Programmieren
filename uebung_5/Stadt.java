@@ -129,7 +129,20 @@ public class Stadt {
 	}
 
 	public Haus Hausbauen(Haus haus, int jahr) {
-		haus.AnWohn = new Random().nextInt(20) + 1;
+		
+		haus.AnWohn = new Random().nextInt(20) + 1; //Die Haus größe wird zufällig bestimmt
+		
+		// Hausart festlegen (Einfamilienhaus(1), Mehrfamielienhaus(2), Hochhaus(3)) 
+		if(haus.AnWohn <= 1) {
+			haus.Hausart = 1;
+		}
+		if(haus.AnWohn > 1 && haus.AnWohn < 10) {
+			haus.Hausart = 2;
+		}
+		if(haus.AnWohn > 10) {
+			haus.Hausart = 3;
+		}
+		
 		haus.Baujahr = jahr;
 		haus.Hgebaut = true;
 		haus.wohnungen = Haus.defwohnungen(haus.AnWohn, haus.Hgebaut);
