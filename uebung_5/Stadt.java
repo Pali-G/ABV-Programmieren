@@ -118,11 +118,14 @@ public class Stadt {
 			int Hnr = i;
 			int Baujahr = 0000;
 			boolean Hgebaut = false;
+			int Strnr = strasse.length + 1;
+			int Hausart = 0;
+			boolean Feuertreppe = false;
 			Haus[] htmp = new Haus[haus.length + 1];
 			for (int j = 0; j < haus.length; j++) {
 				htmp[j] = haus[j];
 			}
-			htmp[haus.length] = new Haus(AnWohn, Hnr, Baujahr, Hgebaut, strasse.length);
+			htmp[haus.length] = new Haus(AnWohn, Hnr, Hgebaut, strasse.length, Baujahr, Hausart, Feuertreppe, Strnr);
 			haus = htmp;
 		}
 		return haus;
@@ -135,12 +138,15 @@ public class Stadt {
 		// Hausart festlegen (Einfamilienhaus(1), Mehrfamielienhaus(2), Hochhaus(3)) 
 		if(haus.AnWohn <= 1) {
 			haus.Hausart = 1;
+			haus.Feuertreppe = false;
 		}
 		if(haus.AnWohn > 1 && haus.AnWohn < 10) {
 			haus.Hausart = 2;
+			haus.Feuertreppe = false;
 		}
-		if(haus.AnWohn > 10) {
+		if(haus.AnWohn >= 10) {
 			haus.Hausart = 3;
+			haus.Feuertreppe = true;
 		}
 		
 		haus.Baujahr = jahr;
