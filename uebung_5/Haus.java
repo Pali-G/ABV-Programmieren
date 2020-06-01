@@ -8,13 +8,15 @@ public class Haus {
 	int Strnr;
 	int Hnr;// Grundstücknummer
 	int Baujahr;
+	int Hausart;
 	//boolean Hbewohnt;// true ist bewohnt, false ist leer
 	boolean Hgebaut;// true ist gebaut
 	boolean[] wohnungen;// sh. Anzahlwohnungen
-	int Hausart;
+	boolean Feuertreppe;
+	
 
 // Konstruktor Klasse Haus
-	public Haus(int AW, int HN, int BJ, boolean geb, int St, int HA) {
+	public Haus(int AW, int HN, int BJ, boolean geb, int St, int HA, boolean FT) {
 		this.AnWohn = AW;
 		this.Strnr = St;
 		this.Hnr = HN;
@@ -22,6 +24,7 @@ public class Haus {
 		this.Hgebaut = geb;
 		this.wohnungen = defwohnungen(AnWohn, Hgebaut);
 		this.Hausart = HA;
+		this.Feuertreppe = FT;
 	}
 
 	public static boolean[] defwohnungen(int Anzahlwohnungen, boolean gebaut) {
@@ -38,4 +41,3 @@ public class Haus {
 		return wng;
 	}
 }
-
