@@ -35,7 +35,7 @@ public class Simulation {
 			stadt.Wohnraumanpassen(hochhaus, einfamhaus, strasse, meldeamt, whnstats, jahr);
 			hochhaus = (Hochhaus[]) stadt.stmp.pop();
 			einfamhaus = (Einfamilienhaus[]) stadt.stmp.pop();
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		}
 	}
 	public static void Info(int jahr, int[] whnstats, int[] meldeamt, Strasse[] strasse) {

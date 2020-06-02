@@ -8,7 +8,7 @@ public class Einfamilienhaus extends Haus<Einfamilienhaus>{
 		this.Hnr = HN;
 		this.Baujahr = BJ;
 		this.Hgebaut = geb;
-		this.wohnungen = defwohnungen(AnWohn, Hgebaut);
+		this.wohnungen = defwohnungen(AnWohn, Hgebaut, false);
 	}
 	
 	public static Einfamilienhaus[] WreckingBall(Einfamilienhaus[] haus, int jahr) {

@@ -13,9 +13,9 @@ public abstract class Haus<T>{
 	boolean Hgebaut;// true ist gebaut
 	boolean[] wohnungen;// sh. Anzahlwohnungen
 	
-	public boolean[] defwohnungen(int Anzahlwohnungen, boolean gebaut) {
+	public boolean[] defwohnungen(int Anzahlwohnungen, boolean gebaut, boolean wartezeit) {
 		boolean[] wng = new boolean[Anzahlwohnungen];
-		if (gebaut == true) {
+		if (gebaut == true && wartezeit == false) {
 		for (int i = 0; i < Anzahlwohnungen; i++) {
 			wng[i] = new Random().nextBoolean();
 		}

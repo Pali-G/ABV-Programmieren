@@ -6,7 +6,6 @@ import java.util.Stack;
 public class Stadt {
 
 	public Stadt() {
-		
 	}
 	Stack stmp = new Stack();
 
@@ -44,7 +43,7 @@ public class Stadt {
 
 	public void Wohnraumanpassen(Hochhaus[] hochhaus, Einfamilienhaus[] einfamhaus, Strasse[] strasse, int[] meldeamt,
 			int[] whnstats, int jahr) {
-		for (int i = 0; i < meldeamt[1]; i++) {// Ausziehen
+		for (int i = 0; i <= meldeamt[1]; i++) {// Ausziehen
 			if (i % 2 == 0) {
 				int[] mieter = HRausschmiss(hochhaus);
 				hochhaus[mieter[0]].wohnungen[mieter[1]] = false;
@@ -66,13 +65,13 @@ public class Stadt {
 			hochhaus = (Hochhaus[]) stmp.pop();
 			einfamhaus = (Einfamilienhaus[]) stmp.pop();
 		}
-		for (int i = 0; i < meldeamt[0]; i++) {
+		for (int i = 0; i <= meldeamt[0]; i++) {
 			if (i % 2 == 0) {
-				int[] mieter = HEinziehen(hochhaus);
-				hochhaus[mieter[0]].wohnungen[mieter[1]] = true;
-			}else {
-				int[] mieter = EEinziehen(einfamhaus);
-				einfamhaus[mieter[0]].wohnungen[mieter[1]] = true;
+				int[] mieterh = HEinziehen(hochhaus);
+				hochhaus[mieterh[0]].wohnungen[mieterh[1]] = true;
+			} else {
+				int[] mietere = EEinziehen(einfamhaus);
+				einfamhaus[mietere[0]].wohnungen[mietere[1]] = true;
 			}
 		}
 		stmp.push(einfamhaus);
@@ -118,7 +117,6 @@ public class Stadt {
 			if (haus[k].Hgebaut == true) {
 				for (int j = 0; j < haus[k].AnWohn; j++) {
 					if (haus[k].wohnungen[j] == false) {
-						// System.out.println("Bevor: " + haus[k].wohnungen[j]);
 						mieter[0] = k;
 						mieter[1] = j;
 						return mieter;
@@ -128,13 +126,13 @@ public class Stadt {
 		}
 		return mieter;
 	}
+
 	public int[] EEinziehen(Einfamilienhaus[] haus) {
 		int[] mieter = new int[2];
 		for (int k = 0; k < haus.length; k++) {
 			if (haus[k].Hgebaut == true) {
 				for (int j = 0; j < haus[k].AnWohn; j++) {
 					if (haus[k].wohnungen[j] == false) {
-						// System.out.println("Bevor: " + haus[k].wohnungen[j]);
 						mieter[0] = k;
 						mieter[1] = j;
 						return mieter;
@@ -220,7 +218,7 @@ public class Stadt {
 		hochhaus.AnWohn = new Random().nextInt(20) + 1;
 		hochhaus.Baujahr = jahr;
 		hochhaus.Hgebaut = true;
-		hochhaus.wohnungen = hochhaus.defwohnungen(hochhaus.AnWohn, hochhaus.Hgebaut);
+		hochhaus.wohnungen = hochhaus.defwohnungen(hochhaus.AnWohn, hochhaus.Hgebaut, true);
 		return hochhaus;
 	}
 
@@ -228,7 +226,7 @@ public class Stadt {
 		einfamhaus.AnWohn = new Random().nextInt(1) + 1;
 		einfamhaus.Baujahr = jahr;
 		einfamhaus.Hgebaut = true;
-		einfamhaus.wohnungen = einfamhaus.defwohnungen(einfamhaus.AnWohn, einfamhaus.Hgebaut);
+		einfamhaus.wohnungen = einfamhaus.defwohnungen(einfamhaus.AnWohn, einfamhaus.Hgebaut, true);
 		return einfamhaus;
 	}
 
@@ -238,6 +236,8 @@ public class Stadt {
 			if (hochhaus[i].Strnr > strassenanzahl) {
 				strassenanzahl = hochhaus[i].Strnr;
 			}
+		}
+		for (int i = 0; i < einfamhaus.length; i++) {
 			if (einfamhaus[i].Strnr > strassenanzahl) {
 				strassenanzahl = einfamhaus[i].Strnr;
 			}

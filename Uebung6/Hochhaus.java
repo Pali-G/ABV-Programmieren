@@ -10,7 +10,7 @@ public class Hochhaus extends Haus<Hochhaus>{
 		this.Hnr = HN;
 		this.Baujahr = BJ;
 		this.Hgebaut = geb;
-		this.wohnungen = defwohnungen(AnWohn, Hgebaut);
+		this.wohnungen = defwohnungen(AnWohn, Hgebaut, false);
 		this.Feuertreppe = Brandschutzgesetz(AnWohn);
 	}
 	
