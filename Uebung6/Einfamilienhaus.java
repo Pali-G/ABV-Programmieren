@@ -29,5 +29,4 @@ public class Einfamilienhaus extends Haus<Einfamilienhaus>{
 		}
 		return leer;
 	}
-
 }
