@@ -16,13 +16,13 @@ public class Strasse {
 		Einfamilienhaus[] ehäuser = new Einfamilienhaus[AGr/2];
 		for (int j = 0; j < AGr; j++) {
 				int Hausnummer = j+1;
-				int Baujahr = Jahr - new Random().nextInt(60);
+				int Baujahr = Jahr - new Random().nextInt(66);
 				boolean gebaut = new Random().nextBoolean();
 				if(j%2 == 0 ) {
-					int Anzahlwohnungenh = new Random().nextInt(20) + 1;
+					int Anzahlwohnungenh = new Random().nextInt(20) + 2;
 					hhäuser[j/2] = new Hochhaus(Anzahlwohnungenh, Hausnummer, Baujahr, gebaut);
 				}else {
-					int Anzahlwohnungene = new Random().nextInt(1) + 1;
+					int Anzahlwohnungene = 1;
 					ehäuser[j/2] = new Einfamilienhaus(Anzahlwohnungene, Hausnummer, Baujahr, gebaut);
 				}
 	
@@ -45,5 +45,30 @@ public class Strasse {
 		}
 		return Grbebaut;
 	}
-	
+	public Einfamilienhaus[] WreckingBallE(int jahr) {
+		for (int i = 0; i < Ehäuser.length; i++) {
+			if (Ehäuser[i].Hgebaut == true && Ehäuser[i].Hausleer(Ehäuser[i]) == true && Ehäuser[i].Baujahr < (jahr-60)) {
+				Ehäuser[i].Hgebaut = false;
+				Ehäuser[i].Habgerissen = true;
+				Ehäuser[i].AnWohn = 0;
+				Ehäuser[i].Baujahr = 0000;
+				Ehäuser[i].wohnungen = Ehäuser[i].defwohnungen(Ehäuser[i].AnWohn, Ehäuser[i].Hgebaut);
+				//System.out.println("Ein Haus wurde abgerissen" + Ehäuser[i].Baujahr);
+			}
+		}
+		return Ehäuser;
+	}
+	public Hochhaus[] WreckingBallH(int jahr) {
+		for (int i = 0; i < Hhäuser.length; i++) {
+			if (Hhäuser[i].Hgebaut == true && Hhäuser[i].Hausleer(Hhäuser[i]) == true && Hhäuser[i].Baujahr < (jahr-60)) {
+				Hhäuser[i].Hgebaut = false;
+				Hhäuser[i].Habgerissen = true;
+				Hhäuser[i].AnWohn = 0;
+				Hhäuser[i].Baujahr = 0000;
+				Hhäuser[i].wohnungen = Hhäuser[i].defwohnungen(Hhäuser[i].AnWohn, Hhäuser[i].Hgebaut);
+				//System.out.println("Ein Haus wurde abgerissen" + haus[i].Baujahr);
+			}
+		}
+		return Hhäuser;
+	}
 }

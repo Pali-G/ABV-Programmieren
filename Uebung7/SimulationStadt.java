@@ -116,6 +116,34 @@ public class SimulationStadt {
 			}
 		}
 	}
+	
+	public static void printAbriss (Strasse[] strassen, int jahr, Stadt stadt) {
+		if(stadt.abgerisseneHäuser(strassen, jahr)[0]==0 && stadt.abgerisseneHäuser(strassen, jahr)[1]==jahr) {
+			System.out.println("Keine Häuser abgerissen im Jahr " + jahr);
+		}else {
+			System.out.println("Abgerissene Häuser im Jahr " + jahr + ":");
+			System.out.println("|Straße\t|Hausnummer\t|Haustyp\t|");
+			for (int i=0; i < strassen.length; i++) { //Strassennummer
+				for (int j=1; j <= strassen[i].Hhäuser.length*2; j++) { //Hausnummer
+					for (int k=0; k < strassen[i].Hhäuser.length; k++) {  //pos. im array Hhäuser
+						if (strassen[i].Hhäuser[k].Hnr==j) {
+							if (strassen[i].Hhäuser[k].Habgerissen==true) {
+								System.out.println("|"+ (i+1) + "\t|" + j + "\t\t|" + "Hochhaus\t|");
+							}
+						}
+					}
+					for (int k=0; k < strassen[i].Ehäuser.length; k++) {
+						if (strassen[i].Ehäuser[k].Hnr==j) {
+							if (strassen[i].Ehäuser[k].Habgerissen==true) {
+								System.out.println("|"+ (i+1) + "\t|" + j + "\t\t|" + "Einfamilienhaus|");
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+		
 
 	public static void SimulationS() {
 		Scanner sc1 = new Scanner(System.in);
@@ -133,7 +161,7 @@ public class SimulationStadt {
 		Strasse[] Strassen = new Strasse[AS];
 		for (int i = 0; i < AS; i++) {
 			int SNr = i + 1;
-			int SAGr = new Random().nextInt(20) + 1;
+			int SAGr = new Random().nextInt(20) + 3;
 			Strassen[i] = new Strasse(SNr, SAGr, Anfangsjahr);
 
 		}
@@ -149,7 +177,7 @@ public class SimulationStadt {
 					int Aw2 = sc2.nextInt();
 					printStrasse(stadt, Strassen, Aw2);
 					System.out.println(
-							"Willst du eine Liste aller Häuser oder nur 1 bestimmtes Haus betrachten? (ja/nein=1 Haus)");
+							"Willst du eine Liste aller Häuser oder nur 1 bestimmtes Haus betrachten? (ja/nein)");
 					Scanner sc3 = new Scanner(System.in);
 					String Aw3 = sc3.nextLine();
 					if (Aw3.contains("nein") == true) {
@@ -158,7 +186,7 @@ public class SimulationStadt {
 							System.out.println("Hausnummer:");
 							int Aw4 = sc3.nextInt();
 							printHaus(stadt, Strassen, Aw2, Aw4);
-							System.out.println("Willst du ein weiteres haus betrachten? (ja/nein)");
+							System.out.println("Willst du ein weiteres Haus betrachten? (ja/nein)");
 							Scanner sc4 = new Scanner(System.in);
 							Aw5 = sc4.nextLine();
 						}
@@ -177,11 +205,11 @@ public class SimulationStadt {
 			}
 			if (Aw1.contains("nein") == true) {
 				String Aw7 = "ja";
+				System.out.println("Willst du eine Liste aller Straßen sehen? (ja/nein)");
+				System.out.println("Wenn nicht beginnt ein neues Jahr.");
+				Scanner sc5 = new Scanner(System.in);
+				Aw7 = sc5.nextLine();
 				while (Aw7.contains("ja") == true) {
-					System.out.println("Willst du eine Liste aller Straßen sehen? (ja/nein)");
-					System.out.println("Wenn nicht beginnt ein neues Jahr.");
-					Scanner sc5 = new Scanner(System.in);
-					Aw7 = sc5.nextLine();
 					if (Aw7.contains("ja") == true) {
 						printStrassenListe(stadt, Strassen);
 						System.out.println("Willst du jetzt eine Strasse genauer betrachten? (ja/nein)");
@@ -190,8 +218,7 @@ public class SimulationStadt {
 							System.out.println("Welche Straße? (Straßennummer)");
 							int Aw2 = sc2.nextInt();
 							printStrasse(stadt, Strassen, Aw2);
-							System.out.println(
-									"Willst du eine Liste aller Häuser oder nur 1 bestimmtes Haus betrachten? (ja/nein=1 Haus)");
+							System.out.println("Willst du eine Liste aller Häuser oder nur 1 bestimmtes Haus betrachten? (ja/nein)");
 							Scanner sc3 = new Scanner(System.in);
 							String Aw3 = sc3.nextLine();
 							if (Aw3.contains("nein") == true) {
@@ -219,7 +246,10 @@ public class SimulationStadt {
 					}
 				}
 			}
-			
+			stadt.Wegziehen(stadt, Strassen);
+			stadt.Abriss(Strassen, stadt, Jahr);
+			printAbriss(Strassen, Jahr, stadt);
+			stadt.Wohnraumanpassen(Strassen, Jahr);
 		}
 	}
 }

@@ -11,6 +11,7 @@ public abstract class Haus <T>{
 	boolean Hgebaut;// true ist gebaut
 	boolean[] wohnungen;// sh. Anzahlwohnungen
 	int wohnungenbewohnt;
+	boolean Habgerissen;
 
 	// Konstruktor Klasse Haus
 	//public Haus(int AW, int HN, int BJ, boolean geb/*, int St*/) {
@@ -23,7 +24,7 @@ public abstract class Haus <T>{
 		this.wohnungenbewohnt = wohnungenbewohnt();
 	}*/
 	
-	public static boolean[] defwohnungen(int Anzahlwohnungen, boolean gebaut) {
+	public boolean[] defwohnungen(int Anzahlwohnungen, boolean gebaut) {
 		boolean[] wng = new boolean[Anzahlwohnungen];
 		if (gebaut == true) {
 		for (int i = 0; i < Anzahlwohnungen; i++) {
@@ -36,6 +37,8 @@ public abstract class Haus <T>{
 		}
 		return wng;
 	}
+	
+	
 	public int wb(boolean[] wohnungen) {
 		int wb = 0;
 		for (int i=0; i<wohnungen.length; i++) {

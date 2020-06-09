@@ -13,6 +13,7 @@ public class Hochhaus extends Haus<Hochhaus>{
 		this.wohnungen = defwohnungen(AnWohn, Hgebaut);
 		this.wohnungenbewohnt = wb(wohnungen);
 		this.Feuertreppe = Brandschutzgesetz(AnWohn);
+		this.Habgerissen = false;
 	}
 	public boolean Brandschutzgesetz(int AnWohn) {
 		boolean Feuertreppe = false;
@@ -21,7 +22,7 @@ public class Hochhaus extends Haus<Hochhaus>{
 		}
 		return Feuertreppe;
 	}
-	public static boolean Hausleer(Hochhaus haus) {
+	public boolean Hausleer(Hochhaus haus) {
 		boolean leer = true;
 		for (int i = 0;i<haus.wohnungen.length; i++) {
 			if (haus.wohnungen[i] == true) {
@@ -30,13 +31,5 @@ public class Hochhaus extends Haus<Hochhaus>{
 		}
 		return leer;
 	}
-	public static Hochhaus[] WreckingBall(Hochhaus[] haus, int jahr) {
-		for (int i = 0; i < haus.length; i++) {
-			if (haus[i].Hgebaut == true && Hausleer(haus[i]) == true && haus[i].Baujahr < (jahr-60)) {
-				haus[i].Hgebaut = false;
-				System.out.println("Ein Haus wurde abgerissen" + haus[i].Baujahr);
-			}
-		}
-		return haus;
-	}
+		
 }

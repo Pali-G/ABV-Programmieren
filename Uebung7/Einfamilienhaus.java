@@ -10,8 +10,9 @@ public class Einfamilienhaus extends Haus<Einfamilienhaus> {
 		this.Hgebaut = geb;
 		this.wohnungen = defwohnungen(AnWohn, Hgebaut);
 		this.wohnungenbewohnt = wb(wohnungen);
+		this.Habgerissen = false;
 	}
-	public static boolean Hausleer(Einfamilienhaus haus) {
+	public boolean Hausleer(Einfamilienhaus haus) {
 		boolean leer = true;
 		for (int i = 0;i<haus.wohnungen.length; i++) {
 			if (haus.wohnungen[i] == true) {
@@ -20,14 +21,6 @@ public class Einfamilienhaus extends Haus<Einfamilienhaus> {
 		}
 		return leer;
 	}
-	public static Einfamilienhaus[] WreckingBall(Einfamilienhaus[] haus, int jahr) {
-		for (int i = 0; i < haus.length; i++) {
-			if (haus[i].Hgebaut == true && Hausleer(haus[i]) == true && haus[i].Baujahr < (jahr-60)) {
-				haus[i].Hgebaut = false;
-				System.out.println("Ein Haus wurde abgerissen" + haus[i].Baujahr);
-			}
-		}
-		return haus;
-	}
+	
 }
 
