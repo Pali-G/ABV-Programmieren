@@ -1,21 +1,21 @@
-package uebung7;
+package uebung6;
 
 import java.util.Random;
 
-public abstract class Haus <T>{
+
+public abstract class Haus<T>{
+
 	int AnWohn;
 	int Strnr;
-	int Hnr;// Grundstücknummer
+	int Hnr;// GrundstÃ¼cknummer
 	int Baujahr;
 	//boolean Hbewohnt;// true ist bewohnt, false ist leer
 	boolean Hgebaut;// true ist gebaut
 	boolean[] wohnungen;// sh. Anzahlwohnungen
-	int wohnungenbewohnt;
-
 	
-	public static boolean[] defwohnungen(int Anzahlwohnungen, boolean gebaut) {
+	public boolean[] defwohnungen(int Anzahlwohnungen, boolean gebaut, boolean wartezeit) {
 		boolean[] wng = new boolean[Anzahlwohnungen];
-		if (gebaut == true) {
+		if (gebaut == true && wartezeit == false) {
 		for (int i = 0; i < Anzahlwohnungen; i++) {
 			wng[i] = new Random().nextBoolean();
 		}
@@ -25,14 +25,5 @@ public abstract class Haus <T>{
 			}
 		}
 		return wng;
-	}
-	public int wb(boolean[] wohnungen) {
-		int wb = 0;
-		for (int i=0; i<wohnungen.length; i++) {
-			if(wohnungen[i]==true) {
-				wb++;
-			}
-		}
-		return wb;
 	}
 }

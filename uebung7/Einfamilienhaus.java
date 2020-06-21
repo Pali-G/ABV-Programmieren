@@ -1,15 +1,24 @@
-package uebung7;
+package uebung6;
 
-public class Einfamilienhaus extends Haus<Einfamilienhaus> {
-	
-	public Einfamilienhaus (int AW, int HN, int BJ, boolean geb, int St) {
+public class Einfamilienhaus extends Haus<Einfamilienhaus>{
+
+	public Einfamilienhaus(int AW, int HN, int BJ, boolean geb, int St) {
 		this.AnWohn = AW;// So wird der Variable Hausnummer im Konstruktor ein wert zugeordnet
-		this.Strnr = St;
+		this.Strnr = 
 		this.Hnr = HN;
 		this.Baujahr = BJ;
 		this.Hgebaut = geb;
-		this.wohnungen = defwohnungen(AnWohn, Hgebaut);
-		this.wohnungenbewohnt = wb(wohnungen);
+		this.wohnungen = defwohnungen(AnWohn, Hgebaut, false);
+	}
+	
+	public static Einfamilienhaus[] WreckingBall(Einfamilienhaus[] haus, int jahr) {
+		for (int i = 0; i < haus.length; i++) {
+			if (haus[i].Hgebaut == true && Hausleer(haus[i]) == true && haus[i].Baujahr < (jahr-60)) {
+				haus[i].Hgebaut = false;
+				System.out.println("Ein Haus wurde abgerissen" + haus[i].Baujahr);
+			}
+		}
+		return haus;
 	}
 	public static boolean Hausleer(Einfamilienhaus haus) {
 		boolean leer = true;
@@ -20,13 +29,5 @@ public class Einfamilienhaus extends Haus<Einfamilienhaus> {
 		}
 		return leer;
 	}
-	public static Einfamilienhaus[] WreckingBall(Einfamilienhaus[] haus, int jahr) {
-		for (int i = 0; i < haus.length; i++) {
-			if (haus[i].Hgebaut == true && Hausleer(haus[i]) == true && haus[i].Baujahr < (jahr-60)) {
-				haus[i].Hgebaut = false;
-				System.out.println("Ein Haus wurde abgerissen" + haus[i].Baujahr);
-			}
-		}
-		return haus;
-	}
+    
 }
