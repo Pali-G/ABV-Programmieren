@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class Testklasse {
-	private JFrame Frame;
+	private JFrame frame;
 	private Canvas canvas;
 	private String title;
 	private int width, height;
@@ -18,23 +18,37 @@ public class Testklasse {
 	}
 	
 	public void createDisplay() {
-		Frame = new JFrame(title);
-		Frame.setSize(width, height);
-		Frame.setDefaultCloseOperation(Frame.EXIT_ON_CLOSE);
-		Frame.setResizable(true);
-		Frame.setLocationRelativeTo(null);
-		Frame.setVisible(true);
+		frame = new JFrame(title);
+		frame.setSize(width, height);
+		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		frame.setResizable(true);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 		
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setMaximumSize(new Dimension(width, height));
 		canvas.setMinimumSize(new Dimension(width, height));
+		canvas.setFocusable(false);
 		
-		Frame.add(canvas);
-		Frame.pack();
+		frame.add(canvas);
+		frame.pack();
 	}
 	
 	public Canvas getCanvas() {
 		return canvas;
 	}
+	
+	public JFrame getJFrame() {
+		return frame;
+	}
 }
+
+
+
+
+
+
+
+
+
