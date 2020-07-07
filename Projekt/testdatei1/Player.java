@@ -2,37 +2,40 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Player extends Creature{
-	
-	private Game game;	
 
 	public Player(Game game, float x, float y) {
-		super(x, y);
-		this.game = game;
+		super(game, x, y, Creature.DEFAULT_WIDTH, Creature.DEFAULT_HEIGHT);
 	}
 
 	@Override
 	public void update() {
-		if(game.getKeyManager().up) {
-			y -= 3;
-		}
-		if(game.getKeyManager().down) {
-			y += 3;
-		}
-		if(game.getKeyManager().left) {
-			x -= 3;
-		}
-		
-		if(game.getKeyManager().right) {
-			x += 3;
-		}
+		getInput();
+		move();
+		game.getGameCamera().centerOnEntity(this);
 	}
 
+	private void getInput() {
+		xMove = 0;
+		yMove = 0;
+		
+		if(game.getKeyManager().up) {
+			yMove = -speed;
+		}
+		if(game.getKeyManager().down) {
+			yMove = speed;
+		}
+		if(game.getKeyManager().left) {
+			xMove = -speed;
+		}
+		if(game.getKeyManager().right) {
+			xMove = speed;
+		}
+	}
+	
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.blue);
-		g.fillRect((int) x, (int) y, 23, 23);
-		g.setColor(Color.green);
-		g.fillRect((int) x+4, (int) y+4, 15, 15);
+		g.drawImage(ImageLoader.loadImage("/textures/Player.png"), (int) (x - game.getGameCamera().getxOffset()), 
+				(int) (y - game.getGameCamera().getyOffset()), null);
 	//	g.drawImage(testImage, 10, 10, null);
 	}
 	

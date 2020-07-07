@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class Game implements Runnable {
 	private Testklasse display;
-	public int width, height;
+	private int width, height;
 	public String title;
 	private BufferStrategy bs;
 	private Graphics g;
@@ -19,17 +19,22 @@ public class Game implements Runnable {
 	
 	//Input
 	private KeyManager keyManager;
+	
+	//CAMERA
+	private GameCamera gameCamera;
 
 	public Game(String title, int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.title = title;
+		keyManager = new KeyManager();
 	}
 
 	private void init() {
 		display = new Testklasse(title, width, height);
-		keyManager = new KeyManager();
-		display.getJFrame().addKeyListener(keyManager);
+		display.getFrame().addKeyListener(keyManager);
+		
+		gameCamera = new GameCamera(this, 0, 0);
 	//	testImage = ImageLoader.loadImage("/textures/testImage.png");
 		gameState = new GameState(this);
 		menuState = new MenuState(this);
@@ -107,6 +112,18 @@ public class Game implements Runnable {
 		return keyManager;
 	}
 
+	public GameCamera getGameCamera() {
+		return this.gameCamera;
+	}
+	
+	public int getWidth() {
+		return this.width;
+	}
+	
+	public int getHeight() {
+		return this.height;
+	}
+	
 	public synchronized void start() {
 		if(running)
 			return;

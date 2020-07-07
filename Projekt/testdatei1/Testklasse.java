@@ -39,7 +39,7 @@ public class Testklasse {
 		return canvas;
 	}
 	
-	public JFrame getJFrame() {
+	public JFrame getFrame() {
 		return frame;
 	}
 }
