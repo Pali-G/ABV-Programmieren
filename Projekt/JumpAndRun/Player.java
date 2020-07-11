@@ -1,4 +1,4 @@
-import java.awt.Graphics;
+	import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Player {
@@ -17,6 +17,8 @@ public class Player {
 	protected float ySpeed;
 	protected float xMove, yMove;
 	
+	private String path;
+	
 	//jump stuff
 	private int jumpTimestep;								//Zeit pro tick
 	private long lastTime, timer;							
@@ -25,6 +27,9 @@ public class Player {
 	public static final float DEFAULT_JUMPSPEED = -8.0f;	//standard Beschleunigung
 	private boolean jumping;								
 	private int ticks;
+	
+	//fail
+	public boolean failed;
 	
 	public Player(Handler handler, float x, float y, int width, int height) {
 		this.handler = handler;
@@ -48,6 +53,21 @@ public class Player {
 		jumpSpeed = DEFAULT_JUMPSPEED;
 		jumping = false;
 		ticks = 0;
+		
+//		failed = false;
+	}
+	
+	public void positionAt(float x, float y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	/*public void setFailed(boolean failed) {
+		this.failed = failed;
+	}*/
+	
+	public void setPath(String path) {
+		this.path = path;
 	}
 	
 	private void setJumping(boolean jumping) {
@@ -105,7 +125,10 @@ public class Player {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(ImageLoader.loadImage("/textures/Player1.png"), (int) (x - handler.getGameCamera().getxOffset()), 
+		if(path == null) {
+			path = "/textures/Player1.png";
+		}
+		g.drawImage(ImageLoader.loadImage(path), (int) (x - handler.getGameCamera().getxOffset()), 
 				(int) (y - handler.getGameCamera().getyOffset()), null);
 		//g.setColor(Color.red);
 		//g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()), (int) (y + bounds.y - handler.getGameCamera().getyOffset()), 
@@ -126,6 +149,7 @@ public class Player {
 				x += xMove;
 			}else {
 				x = tx * Tile.TILEWIDTH -bounds.x - bounds.width - 1;
+//				failed = true;
 			}
 		}
 		/*if(xMove < 0) {//moving left

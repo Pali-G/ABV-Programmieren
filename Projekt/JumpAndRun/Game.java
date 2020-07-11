@@ -14,6 +14,7 @@ public class Game implements Runnable {
 	public State gameState;
 	public State menuState;
 	public State settingsState;
+	public State skinState;
 	
 	//Input
 	private KeyManager keyManager;
@@ -45,13 +46,30 @@ public class Game implements Runnable {
 		
 		handler = new Handler(this);
 	//	testImage = ImageLoader.loadImage("/textures/testImage.png");
-		gameState = new GameState(handler);
-		menuState = new MenuState(handler);
 		settingsState = new SettingsState(handler);
+		gameState = new GameState(handler);
+		skinState = new SkinState(handler);
 		
+		menuState = new MenuState(handler);
 		State.setState(menuState);
 	}
-
+	
+	public void initMenuState() {
+		menuState = new MenuState(handler);
+	}
+	
+	public void initSettingsState() {
+		settingsState = new SettingsState(handler);
+	}
+	
+	public void initGameState() {
+		gameState = new GameState(handler);
+	}
+	
+	public void initSkinState() {
+		skinState = new SkinState(handler); 
+	}
+	
 	private void update () {
 		KeyManager.update();
 		if(gameState != null) {
