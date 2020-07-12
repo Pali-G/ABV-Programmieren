@@ -9,6 +9,7 @@ public class MenuState extends State{
 	
 	public MenuState(Handler handler) {
 		super(handler);
+		
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);
 		setButtons();
@@ -16,7 +17,7 @@ public class MenuState extends State{
 			@Override
 			public void onClick() {
 				handler.getMouseManager().setUIManager(null);
-//				handler.getGame().initGameState();
+				handler.getGame().initGameState();
 				State.setState(handler.getGame().gameState);	
 			}} ));
 		uiManager.addObject(new UIImageButton(236, 302, 128, 64, settingsButtons, new ClickListener() {
@@ -28,6 +29,12 @@ public class MenuState extends State{
 			}} ));
 	}
 
+	private void resetMenu() {
+		uiManager = null;
+		handler.getMouseManager().setUIManager(null);
+		
+	}
+	
 	private void setButtons() {
 		startButtons[0] = ImageLoader.loadImage("/textures/Startb.png");
 		startButtons[1] = ImageLoader.loadImage("/textures/Startw.png");

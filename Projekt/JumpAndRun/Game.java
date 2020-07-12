@@ -16,6 +16,8 @@ public class Game implements Runnable {
 	public State settingsState;
 	public State skinState;
 	
+	public String path;
+	
 	//Input
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
@@ -45,13 +47,19 @@ public class Game implements Runnable {
 		gameCamera = new GameCamera(this, 0, 0);
 		
 		handler = new Handler(this);
-	//	testImage = ImageLoader.loadImage("/textures/testImage.png");
+		
+		path = "/textures/Player1.png";
+		
 		settingsState = new SettingsState(handler);
 		gameState = new GameState(handler);
 		skinState = new SkinState(handler);
 		
 		menuState = new MenuState(handler);
 		State.setState(menuState);
+	}
+	
+	public void setPath(String path) {
+		this.path = path;
 	}
 	
 	public void initMenuState() {
@@ -91,14 +99,6 @@ public class Game implements Runnable {
 		if(gameState != null) {
 			State.getState().render(g);
 		}
-		//malen
-		/*g.setColor(Color.blue);
-		g.fillRect(x, y, 23, 23);
-		g.setColor(Color.green);
-		g.fillRect(x+4, y+4, 15, 15);*/
-	//	g.drawImage(testImage, 10, 10, null);
-		
-		
 		//malen fertig
 		bs.show();
 		g.dispose();

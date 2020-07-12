@@ -19,7 +19,7 @@ public class SkinState extends State{
 			@Override
 			public void onClick() {
 				handler.getMouseManager().setUIManager(null);
-				handler.getGame().gameState.getPlayer().setPath(pathFlower);
+				handler.getGame().setPath(pathFlower);
 				handler.getGame().initSettingsState();
 				State.setState(handler.getGame().settingsState);
 			}}));
@@ -27,7 +27,7 @@ public class SkinState extends State{
 			@Override
 			public void onClick() {
 				handler.getMouseManager().setUIManager(null);
-				handler.getGame().gameState.getPlayer().setPath(pathTree);
+				handler.getGame().setPath(pathTree);
 				handler.getGame().initSettingsState();
 				State.setState(handler.getGame().settingsState);
 			}}));

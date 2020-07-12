@@ -1,5 +1,6 @@
 	import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 public class Player {
 	
@@ -8,16 +9,12 @@ public class Player {
 	protected int width, height;
 	protected  Rectangle bounds;
 	
-	public static final float DEFAULT_XSPEED = 4.0f;
 	public static final float DEFAULT_YSPEED = 8.0f;	
 	public static final int DEFAULT_WIDTH = 64;
 	public static final int DEFAULT_HEIGHT = 64;
 	
-	protected float xSpeed;
 	protected float ySpeed;
 	protected float xMove, yMove;
-	
-	private String path;
 	
 	//jump stuff
 	private int jumpTimestep;								//Zeit pro tick
@@ -31,6 +28,8 @@ public class Player {
 	//fail
 	public boolean failed;
 	
+	protected BufferedImage playerImage;
+	
 	public Player(Handler handler, float x, float y, int width, int height) {
 		this.handler = handler;
 		this.x = x;
@@ -38,9 +37,8 @@ public class Player {
 		this.width = width;
 		this.height = height;
 		bounds = new Rectangle(0, 0, width, height);
-		xSpeed = DEFAULT_XSPEED;
 		ySpeed = DEFAULT_YSPEED;	
-		xMove = 0;
+		xMove = 4.0f;
 		yMove = DEFAULT_YSPEED;
 		bounds.x = 20;
 		bounds.y = 39;
@@ -54,7 +52,9 @@ public class Player {
 		jumping = false;
 		ticks = 0;
 		
-//		failed = false;
+		failed = false;
+		
+		playerImage = ImageLoader.loadImage(handler.getGame().path);
 	}
 	
 	public void positionAt(float x, float y) {
@@ -62,12 +62,8 @@ public class Player {
 		this.y = y;
 	}
 	
-	/*public void setFailed(boolean failed) {
+	public void setFailed(boolean failed) {
 		this.failed = failed;
-	}*/
-	
-	public void setPath(String path) {
-		this.path = path;
 	}
 	
 	private void setJumping(boolean jumping) {
@@ -78,7 +74,7 @@ public class Player {
 		ySpeed = DEFAULT_YSPEED;
 	}
 	
-	private boolean onGround() {
+	private boolean getOnGround() {
 		boolean onGround;
 		if(handler.getWorld().getTile((int) x/Tile.TILEWIDTH, (int)(y + bounds.y + bounds.height + 1)/Tile.TILEHEIGHT).isSolid() 
 				|| handler.getWorld().getTile((int) (x+ bounds.x)/Tile.TILEWIDTH , (int)(y + bounds.y + bounds.height + 1)/Tile.TILEHEIGHT).isSolid()) {
@@ -90,7 +86,7 @@ public class Player {
 	}
 	
 	public void update() {
-		if (handler.getKeyManager().up && onGround()) { //
+		if (handler.getKeyManager().up && getOnGround()) { //
 			setJumping(true);
 		}
 		if(jumping) {
@@ -107,6 +103,11 @@ public class Player {
 				ticks = 0;
 				jumpSpeed = DEFAULT_JUMPSPEED;
 				ySpeed = -1 * DEFAULT_JUMPSPEED; 	//damit der Fall bei Sprung von Block nicht nach Ende des Sprungs gebremst wird auf DEFAULT_YSPEED  
+			}else if(getOnGround() && ticks >= (-1* DEFAULT_JUMPSPEED / jumpIncr)) {
+				setJumping(false);
+				ticks = 0;
+				jumpSpeed = DEFAULT_JUMPSPEED;
+				ySpeed = -1 * DEFAULT_JUMPSPEED;
 			}
 		}
 		getInput(jumping);
@@ -115,8 +116,7 @@ public class Player {
 	}
 	
 	private void getInput(boolean jumping) {
-		xMove = xSpeed;
-		if (onGround()) {
+		if (getOnGround()) {
 			resetYspeed();
 		}
 		if (!jumping) {
@@ -125,15 +125,8 @@ public class Player {
 	}
 	
 	public void render(Graphics g) {
-		if(path == null) {
-			path = "/textures/Player1.png";
-		}
-		g.drawImage(ImageLoader.loadImage(path), (int) (x - handler.getGameCamera().getxOffset()), 
+		g.drawImage(playerImage, (int) (x - handler.getGameCamera().getxOffset()), 
 				(int) (y - handler.getGameCamera().getyOffset()), null);
-		//g.setColor(Color.red);
-		//g.fillRect((int) (x + bounds.x - handler.getGameCamera().getxOffset()), (int) (y + bounds.y - handler.getGameCamera().getyOffset()), 
-			//	bounds.width, bounds.height);
-	//	g.drawImage(testImage, 10, 10, null);
 	}
 	
 	public void move() {
@@ -142,25 +135,16 @@ public class Player {
 	}
 	
 	public void moveX() {
-		if(xMove > 0) {//moving right
+		if(xMove > 0) {					//moving right
 			int tx = (int) (x + xMove + bounds.x + bounds.width) / Tile.TILEWIDTH;
 			if(!collisionWithTile(tx, (int) (y + bounds.y) /Tile.TILEHEIGHT) &&
 					!collisionWithTile(tx, (int) (y + bounds.y + bounds.height) /Tile.TILEHEIGHT)) {
 				x += xMove;
 			}else {
 				x = tx * Tile.TILEWIDTH -bounds.x - bounds.width - 1;
-//				failed = true;
+				failed = true;
 			}
 		}
-		/*if(xMove < 0) {//moving left
-			int tx = (int) (x + xMove + bounds.x) / Tile.TILEWIDTH;
-			if(!collisionWithTile(tx, (int) (y + bounds.y) /Tile.TILEHEIGHT) &&
-					!collisionWithTile(tx, (int) (y + bounds.y + bounds.height) /Tile.TILEHEIGHT)) {
-				x += xMove;
-			}else {
-				x = tx * Tile.TILEWIDTH + Tile.TILEWIDTH - bounds.x;
-			}
-		}*/
 	}
 	
 	public void moveY() {
@@ -191,50 +175,31 @@ public class Player {
 		}
 	
 	//GETTERS AND SETTERS	
-	public float getxMove() {
+	/*public float getxMove() {
 		return xMove;
-	}
+	}*/
 
-	public void setxMove(float xMove) {
+	/*public void setxMove(float xMove) {
 		this.xMove = xMove;
-	}
+	}*/
 
-	public float getyMove() {
+	/*public float getyMove() {
 		return yMove;
-	}
+	}*/
 
-	public void setyMove(float yMove) {
+	/*public void setyMove(float yMove) {
 		this.yMove = yMove;
-	}
-
-	public float getxSpeed() {
-		return xSpeed;
-	}
-
-
-	public void setxSpeed(float speed) {
-		this.xSpeed = speed;
-	}
-	
-	public float getySpeed() {
-		return ySpeed;
-	}
-
-
-	public void setySpeed(float speed) {
-		this.ySpeed = speed;
-	}
-
-
-	/*public int getHealth() {
-		return health;
-	}
-
-
-	public void setHealth(int health) {
-		this.health = health;
 	}*/
 	
+	/*public float getySpeed() {
+		return ySpeed;
+	}*/
+
+
+	/*public void setySpeed(float speed) {
+		this.ySpeed = speed;
+	}*/
+
 	public float getX() {
 		return x;
 	}
@@ -255,15 +220,16 @@ public class Player {
 		return height;
 	}
 
-	public void setHeight(int height) {
+	/*public void setHeight(int height) {
 		this.height = height;
-	}
+	}*/
 
 	public int getWidth () {
 		return width;
 	}
-	public void setWidth(int width) {
+	
+	/*public void setWidth(int width) {
 		this.width = width;
-	}
+	}*/
 }
 
