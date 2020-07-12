@@ -9,9 +9,10 @@ import javax.swing.*;
 
 public class Draw extends JPanel{
 	Runner runner = new Runner();
-	static GameGUI frame;
+	static MenuGUI frame;
 	public static void main(String[] args) {
-		frame = new GameGUI("JumpAndRun");
+		
+		frame = new MenuGUI();
 	}
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
