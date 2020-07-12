@@ -13,10 +13,6 @@ public class Draw extends JPanel{
 	public static void main(String[] args) {
 		frame = new GameGUI("JumpAndRun");
 	}
-	public Dimension getPreferredSize() {
-	      // so that our GUI is big enough
-	      return new Dimension(runner.width + 2 * runner.posX, runner.height + 2 * runner.posY);
-	}
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
