@@ -1,22 +1,18 @@
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
 
 public class Runner {
-	static Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
-	static int r_width = 100;
-	static int r_height = r_width;
-	static int posX = r_height;
-	static int posY = screensize.height - 2*r_height;
+	int height;
+	int width;
+	int posX;
+	int posY;
+	Color color;
 	
 	public Runner() {
+		height = 100;
+		width = height;
+		posX = GameGUI.width/2 - 2*width;
+		posY = GameGUI.height - 2*height;
+		color = Color.RED;
 	}
 	
-	public void jump() {
-		for (int i = posX; i < (3*r_height + posX); i = i+5) {
-			posX = i;
-		}
-		for (int i = posX; i < (3*r_height + posX); i = i-10) {
-			posX = i;
-		}
-	}
 }
