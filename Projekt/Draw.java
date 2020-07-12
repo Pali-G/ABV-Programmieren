@@ -22,11 +22,11 @@ public class Draw extends JPanel{
 		Graphics2D g2 = (Graphics2D) g;
 		//g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 		
-		
+		/*TODO BACKGROUND*/
 		//Runner
 		g2.setColor(runner.color);
 		g2.fillRect(runner.posX, runner.posY, runner.width, runner.height);
-		
+		/*TODO BILD RUNNER*/
 		repaint();
 	}
 }

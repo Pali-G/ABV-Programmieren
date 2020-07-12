@@ -14,5 +14,14 @@ public class Runner {
 		posY = GameGUI.height - 2*height;
 		color = Color.RED;
 	}
+	public void jump() {
+		/* TODO
+		 * JUMP*/
+	}
 	
+	public void run() {
+		/* TODO
+		 * RUN
+		 */
+	}
 }
