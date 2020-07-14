@@ -44,15 +44,14 @@ public class Game implements Runnable {
 		display.getCanvas().addMouseListener(mouseManager);
 		display.getCanvas().addMouseMotionListener(mouseManager);
 		
-		gameCamera = new GameCamera(this, 0, 0);
-		
 		handler = new Handler(this);
+		gameCamera = new GameCamera(handler, 0, 0);
 		
 		path = "/textures/Player1.png";
 		
-		settingsState = new SettingsState(handler);
+	/*	settingsState = new SettingsState(handler);
 		gameState = new GameState(handler);
-		skinState = new SkinState(handler);
+		skinState = new SkinState(handler);*/
 		
 		menuState = new MenuState(handler);
 		State.setState(menuState);
@@ -80,7 +79,7 @@ public class Game implements Runnable {
 	
 	private void update () {
 		KeyManager.update();
-		if(gameState != null) {
+		if(gameState != null || menuState != null || settingsState != null || skinState != null) {
 			State.getState().update();
 		}
 		
@@ -96,7 +95,7 @@ public class Game implements Runnable {
 		//canvas putzen
 		g.clearRect(0, 0, width, height);
 		
-		if(gameState != null) {
+		if(gameState != null || menuState != null || settingsState != null || skinState != null) {
 			State.getState().render(g);
 		}
 		//malen fertig

@@ -28,13 +28,6 @@ public class MenuState extends State{
 				State.setState(handler.getGame().settingsState);
 			}} ));
 	}
-
-	private void resetMenu() {
-		uiManager = null;
-		handler.getMouseManager().setUIManager(null);
-		
-	}
-	
 	private void setButtons() {
 		startButtons[0] = ImageLoader.loadImage("/textures/Startb.png");
 		startButtons[1] = ImageLoader.loadImage("/textures/Startw.png");

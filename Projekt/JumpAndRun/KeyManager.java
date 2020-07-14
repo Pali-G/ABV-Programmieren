@@ -4,7 +4,7 @@ import java.awt.event.KeyListener;
 public class KeyManager implements KeyListener{
 	
 	public static boolean[] keys;
-	public static boolean up, down, right, left;
+	public static boolean up;
 	
 	public static void update() {
 		up = keys[KeyEvent.VK_SPACE];

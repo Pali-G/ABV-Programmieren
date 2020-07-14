@@ -9,21 +9,22 @@ public class Player {
 	protected int width, height;
 	protected  Rectangle bounds;
 	
-	public static final float DEFAULT_YSPEED = 8.0f;	
+		
 	public static final int DEFAULT_WIDTH = 64;
 	public static final int DEFAULT_HEIGHT = 64;
-	
-	protected float ySpeed;
+
 	protected float xMove, yMove;
 	
 	//jump stuff
 	private int jumpTimestep;								//Zeit pro tick
 	private long lastTime, timer;							
-	private float jumpSpeed;								//Beschleunigung
-	private float jumpIncr = 0.4f;
-	public static final float DEFAULT_JUMPSPEED = -8.0f;	//standard Beschleunigung
+	private float jumpSpeed;								
+	private float fallAcc = 0.5f;							//Falleschleunigung
+	public static final float DEFAULT_JUMPSPEED = -10.0f;
 	private boolean jumping;								
-	private int ticks;
+//	private int ticks;
+	
+	private boolean falling;
 	
 	//fail
 	public boolean failed;
@@ -36,10 +37,9 @@ public class Player {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		bounds = new Rectangle(0, 0, width, height);
-		ySpeed = DEFAULT_YSPEED;	
+		bounds = new Rectangle(0, 0, width, height);	
 		xMove = 4.0f;
-		yMove = DEFAULT_YSPEED;
+		yMove = 1;
 		bounds.x = 20;
 		bounds.y = 39;
 		bounds.width = 25;
@@ -50,7 +50,7 @@ public class Player {
 		lastTime = System.currentTimeMillis();
 		jumpSpeed = DEFAULT_JUMPSPEED;
 		jumping = false;
-		ticks = 0;
+//		ticks = 0;
 		
 		failed = false;
 		
@@ -64,14 +64,19 @@ public class Player {
 	
 	public void setFailed(boolean failed) {
 		this.failed = failed;
+		if(failed) {
+			xMove = 0;
+		}else {
+			xMove = 4.0f;
+		}
+	}
+	
+	private void setFalling(boolean falling) {
+		this.falling = falling;
 	}
 	
 	private void setJumping(boolean jumping) {
 		this.jumping = jumping;
-	}
-	
-	private void resetYspeed() {
-		ySpeed = DEFAULT_YSPEED;
 	}
 	
 	private boolean getOnGround() {
@@ -89,39 +94,39 @@ public class Player {
 		if (handler.getKeyManager().up && getOnGround()) { //
 			setJumping(true);
 		}
+		if (!getOnGround() && !jumping) {
+			setFalling(true);
+		}
 		if(jumping) {
 			timer += System.currentTimeMillis() - lastTime;
 			lastTime = timer;
 			yMove = jumpSpeed; 
 			if (timer > jumpTimestep) {		//jeden jumpTimestep in ms wird der jump speed kleiner
-				jumpSpeed += jumpIncr;
-				ticks++;
+				jumpSpeed += fallAcc;
+//				ticks++;
 				timer = 0;
 			}
-			if (ticks == (-2 * DEFAULT_JUMPSPEED / jumpIncr)) {  //ticks == Zeit für einen kompletten Sprung
-				setJumping(false);
-				ticks = 0;
+			if (jumpSpeed >= 0) {
 				jumpSpeed = DEFAULT_JUMPSPEED;
-				ySpeed = -1 * DEFAULT_JUMPSPEED; 	//damit der Fall bei Sprung von Block nicht nach Ende des Sprungs gebremst wird auf DEFAULT_YSPEED  
-			}else if(getOnGround() && ticks >= (-1* DEFAULT_JUMPSPEED / jumpIncr)) {
 				setJumping(false);
-				ticks = 0;
-				jumpSpeed = DEFAULT_JUMPSPEED;
-				ySpeed = -1 * DEFAULT_JUMPSPEED;
+				setFalling(true);
+			}
+		}else if (falling) {
+			timer += System.currentTimeMillis() - lastTime;
+			lastTime = timer; 
+			if (timer > jumpTimestep) {		
+				yMove += fallAcc;
+//				ticks++;
+				timer = 0;
+			}
+			if (getOnGround()) {
+				setFalling(false);
+				yMove = 1;
+//				ticks = 0;
 			}
 		}
-		getInput(jumping);
 		move();
 		handler.getGameCamera().centerOnPlayer(this);
-	}
-	
-	private void getInput(boolean jumping) {
-		if (getOnGround()) {
-			resetYspeed();
-		}
-		if (!jumping) {
-			yMove = ySpeed;
-		}
 	}
 	
 	public void render(Graphics g) {
@@ -142,7 +147,7 @@ public class Player {
 				x += xMove;
 			}else {
 				x = tx * Tile.TILEWIDTH -bounds.x - bounds.width - 1;
-				failed = true;
+				setFailed(true);
 			}
 		}
 	}
