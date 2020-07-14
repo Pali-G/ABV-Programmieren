@@ -7,7 +7,6 @@ public class GameState extends State {
 	private World world;
 	
 	private UIManager uiManager;
-	private UIImageButton btn;
 	private BufferedImage[] tryAgain = new BufferedImage[2];
 	private BufferedImage[] menu = new BufferedImage[2];
 	
@@ -34,7 +33,7 @@ public class GameState extends State {
 			public void onClick() {
 				handler.getMouseManager().setUIManager(null);
 				player.setFailed(false);
-				player.positionAt(0, 191);
+				player.positionAt(0, 191);	
 			}
 		}));
 	}

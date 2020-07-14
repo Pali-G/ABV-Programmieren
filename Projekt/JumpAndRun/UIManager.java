@@ -19,7 +19,7 @@ public class UIManager {
 	}
 	
 	public void render(Graphics g) {
-		for (UIObject o : objects) {
+		for (UIObject o : objects) {	
 			o.render(g);
 		}
 	}
@@ -29,7 +29,7 @@ public class UIManager {
 			o.onMouseMove(e);
 		}
 	}
-	
+		
 	public void onMouseReleased(MouseEvent e) {
 		for (UIObject o : objects) {
 			o.onMouseReleased(e);

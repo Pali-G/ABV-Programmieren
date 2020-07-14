@@ -1,6 +1,5 @@
 public class GameCamera {
 	
-	private Game game;
 	private Handler handler;
 	private float xOffset, yOffset;
 	
@@ -8,7 +7,6 @@ public class GameCamera {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
 		this.handler = handler;
-		this.game = handler.getGame();
 	}
 	
 	public void checkBlankSpace(){
@@ -25,8 +23,8 @@ public class GameCamera {
 	}
 	
 	public void centerOnPlayer(Player p) {
-		xOffset = p.getX() - game.getWidth() / 2 + p.getWidth() / 2;
-		yOffset = p.getY() - game.getHeight() / 2 +  p.getHeight() / 2	;
+		xOffset = p.getX() - handler.getGame().getWidth() / 2 + p.getWidth() / 2;
+		yOffset = p.getY() - handler.getGame().getHeight() / 2 +  p.getHeight() / 2	;
 		checkBlankSpace();
 	}
 	

@@ -2,13 +2,13 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
-	private Display display;
+	
+	//Attribute
 	private int width, height;
 	public String title;
-	private BufferStrategy bs;
-	private Graphics g;
 	private boolean running = false;
 	private Thread thread;
+	public String pathPlayer;							//Speicherung des Imagepfades für den Player
 	
 	//States
 	public State gameState;
@@ -16,11 +16,14 @@ public class Game implements Runnable {
 	public State settingsState;
 	public State skinState;
 	
-	public String path;
-	
 	//Input
 	private KeyManager keyManager;
 	private MouseManager mouseManager;
+	
+	//Output
+	private Display display;
+	private BufferStrategy bs;
+	private Graphics g;
 	
 	//CAMERA
 	private GameCamera gameCamera;
@@ -47,18 +50,14 @@ public class Game implements Runnable {
 		handler = new Handler(this);
 		gameCamera = new GameCamera(handler, 0, 0);
 		
-		path = "/textures/Player1.png";
+		pathPlayer = "/textures/Player1.png";
 		
-	/*	settingsState = new SettingsState(handler);
-		gameState = new GameState(handler);
-		skinState = new SkinState(handler);*/
-		
-		menuState = new MenuState(handler);
+		menuState = new MenuState(handler);				//die anderen States werden initialisiert durch späteres anklicken 
 		State.setState(menuState);
 	}
 	
 	public void setPath(String path) {
-		this.path = path;
+		this.pathPlayer = path;
 	}
 	
 	public void initMenuState() {
@@ -79,7 +78,7 @@ public class Game implements Runnable {
 	
 	private void update () {
 		KeyManager.update();
-		if(gameState != null || menuState != null || settingsState != null || skinState != null) {
+		if(gameState != null || menuState != null || settingsState != null || skinState != null) {	
 			State.getState().update();
 		}
 		

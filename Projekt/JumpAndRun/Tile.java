@@ -6,7 +6,7 @@ public class Tile {
 	public static Tile[] tiles = new Tile[300];
 	public static Tile airTile = new AirTile(0);
 	public static Tile groundTile = new GroundTile(1);
-	public static Tile rockTile = new RockTile(2);
+	public static Tile rockTile = new RockTile(2);		
 	
 	
 	

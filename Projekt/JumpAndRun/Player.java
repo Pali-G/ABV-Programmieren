@@ -54,7 +54,7 @@ public class Player {
 		
 		failed = false;
 		
-		playerImage = ImageLoader.loadImage(handler.getGame().path);
+		playerImage = ImageLoader.loadImage(handler.getGame().pathPlayer);
 	}
 	
 	public void positionAt(float x, float y) {
