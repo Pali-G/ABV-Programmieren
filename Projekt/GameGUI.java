@@ -34,14 +34,7 @@ public class GameGUI extends Draw{
 			int key = e.getKeyCode();
 			switch (key) {
             case KeyEvent.VK_SPACE:
-            	System.out.println("bla");
-            	/* TODO
-                 * Jump
-                 * */
-            case KeyEvent.VK_RIGHT:
-            	/* TODO
-            	 * RUN
-            	 * */
+            	draw.jump();
         }
 		}
 	}

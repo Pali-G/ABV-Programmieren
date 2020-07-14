@@ -8,7 +8,7 @@ import javax.swing.*;
  * */
 
 public class Draw extends JPanel{
-	Runner runner = new Runner();
+	Runner runner = new Runner();  
 	static MenuGUI frame;
 	public static void main(String[] args) {
 		
@@ -24,6 +24,11 @@ public class Draw extends JPanel{
 		g2.setColor(runner.color);
 		g2.fillRect(runner.posX, runner.posY, runner.width, runner.height);
 		/*TODO BILD RUNNER*/
+		
+	}
+	
+	public void jump() {
+		runner.posY -= 100;
 		repaint();
 	}
 }
