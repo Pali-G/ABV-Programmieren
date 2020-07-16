@@ -1,0 +1,11 @@
+﻿						Übung 10
+
+Beachten Sie hierbei folgende Punkte:
+1. Projektname – Der Name eines Projektes ist die halbe Miete ;-)
+2. Beschreibung– Was soll das Programm am Ende können?
+3. Aufgabenteilung– Welche Teile sind zu bearbeiten? Wer macht was? Wie werden die Teile zusammengefügt?
+4. Fehler– Wie geht das Programm mit Defekten und Eingabefehlern um?
+5. Dokumentation– technische Dokumentation, Benutzungshandbuch, Projektbericht
+
+Die Dokumentation kann noch bis zum 03.0 8.2020 nachgereicht werden. Nutzen Sie hierfür das KVV.6. Präsentation – Wie präsentieren wir unser Produkt?
+
