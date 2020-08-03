@@ -1,0 +1,14 @@
+Benutzungshandbuch
+ 
+Hauptmenü: 
+•    Mit dem Button „Start“ beginnen Sie das Spiel
+•    Der Button „Settings“ führt sie zu den Einstellungen
+Settings: 
+•    „Skins“ führt zur Skin-Auswahl 
+•    „Menu“ führt zurück zum Hauptmenü
+Skins: 
+•    Auswahl zwischen den zwei Skins „Blume“ und „Baum“
+Spiel: 
+•    Das Ziel ist es, ohne einen Block von der Seite her zu berühren durch das Level zu gelangen
+•    Mit der Leertaste kann der Spieler einen Sprung beginnen, solange er sich am Boden befindet
+•    Wenn der Spieler einen Block von der Seite berührt, kann er entweder das Level neu beginnen, oder zurück ins Menü gelangen
